@@ -4,3 +4,4 @@ composer.phar
 /vendor/
 /backups/coriander/
 /cache/.updater-rate-limit.json
+/old_portfolio/

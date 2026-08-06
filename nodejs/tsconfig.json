@@ -25,5 +25,9 @@
     },
     "include": [
         "src"
+    ],
+    "exclude": [
+        "src/Utils/DEPRECATED - ThemeChanger/**",
+        "src/Utils/ParisClock/**"
     ]
 }

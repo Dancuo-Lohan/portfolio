@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <url>
+    <loc>https://lohan.dancuo.fr/</loc>
+    <lastmod>2024-08-21T16:49:09+02:00</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://lohan.dancuo.fr/my-work</loc>
+    <lastmod>2024-09-03T21:51:14+02:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://lohan.dancuo.fr/components/vertical-parallax</loc>
+    <lastmod>2024-09-05T23:51:14+02:00</lastmod>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://lohan.dancuo.fr/case-studies/roomCalendars</loc>
+    <lastmod>2024-09-05T23:51:14+02:00</lastmod>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://lohan.dancuo.fr/contact-me</loc>
+    <lastmod>2024-08-21T16:49:09+02:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://lohan.dancuo.fr/legal-notice</loc>
+    <lastmod>2024-08-21T16:49:09+02:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://lohan.dancuo.fr/terms-and-conditions</loc>
+    <lastmod>2024-08-21T16:49:09+02:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+</urlset>

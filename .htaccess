@@ -6,6 +6,9 @@ DirectoryIndex public/index.php
 # Disable directory listing for security
 Options -Indexes
 
+# Serve public static files when the project root is the web root.
+RewriteRule ^(assets/.*|favicon\.ico|sitemap\.xml|robots?\.txt)$ public/$1 [L]
+
 # Exclude static files (CSS, JS, images) from routing to index.php
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule \.(css|js|png|jpg|jpeg|gif|svg|webp)$ - [L]
@@ -16,4 +19,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ public/index.php [QSA,L]
 
 # Error pages
-ErrorDocument 404 /notfound
+ErrorDocument 404 /page-not-found

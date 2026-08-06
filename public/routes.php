@@ -1,5 +1,7 @@
 <?php
 
+use CorianderCore\Core\Router\ViewRenderer;
+use Nyholm\Psr7\Response;
 use Nyholm\Psr7\ServerRequest;
 
 /** @var \CorianderCore\Core\Router\Router $router */
@@ -20,11 +22,24 @@ use Nyholm\Psr7\ServerRequest;
 //     echo 'User ID: ' . $request->getAttribute('id');
 // });
 
+$renderView = static function (string $view, array $data = []): callable {
+    return static function () use ($view, $data): void {
+        (new ViewRenderer())->render($view, $data);
+    };
+};
+
+$router->setNotFound(static function () use ($renderView): Response {
+    ob_start();
+    $renderView('page-not-found')();
+    return new Response(404, [], (string) ob_get_clean());
+});
+
 // Route for handling sitemap.xml requests
 $router->get('sitemap.xml', function (ServerRequest $request) use ($notFound) {
-    $sitemapPath = PROJECT_ROOT . '/public/sitemap.php';
+    $sitemapPath = PROJECT_ROOT . '/public/sitemap.xml';
     if (!file_exists($sitemapPath)) {
         return $notFound();
     }
-    require_once $sitemapPath;
+
+    return new Response(200, ['Content-Type' => 'application/xml; charset=utf-8'], (string) file_get_contents($sitemapPath));
 });
