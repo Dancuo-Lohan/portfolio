@@ -42,13 +42,13 @@
                 </div>
                 <div class="flex flex-wrap gap-3">
                     <a href="https://corianderphp.com" target="_blank" rel="noopener noreferrer" class="inline-flex rounded-md bg-dark-green px-4 py-2 text-sm font-semibold text-white transition hover:opacity-70 dark:bg-accent-green dark:text-black">
-                        Read the documentation
+                        View documentation
                     </a>
                     <a href="https://github.com/CorianderPHP/CorianderPHP" target="_blank" rel="noopener noreferrer" class="inline-flex rounded-md border border-dark-green/40 px-4 py-2 text-sm font-semibold text-dark-green transition hover:opacity-70 dark:border-accent-green/40 dark:text-accent-green">
-                        Framework repository
+                        Framework source code
                     </a>
                     <a href="https://github.com/CorianderPHP/Documentation" target="_blank" rel="noopener noreferrer" class="inline-flex rounded-md border border-dark-green/40 px-4 py-2 text-sm font-semibold text-dark-green transition hover:opacity-70 dark:border-accent-green/40 dark:text-accent-green">
-                        Documentation repository
+                        Documentation source code
                     </a>
                 </div>
             </div>
