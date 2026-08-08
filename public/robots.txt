@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://lohan.dancuo.fr/sitemap.xml

@@ -2,9 +2,11 @@ import { HorizontalScrollManager } from "../Utils/Animations/HorizontalScrollMan
 import { ScaleOnScrollManager } from "../Utils/Animations/ScaleOnScrollManager/ScaleOnScrollManager";
 import { Responsive } from "../Utils/Responsive/Responsive";
 import { ThemeHandler } from "../Utils/ThemeHandler/ThemeHandler";
+import { LanguageScrollHandler } from "../Utils/LanguageScrollHandler/LanguageScrollHandler";
 
 document.addEventListener("DOMContentLoaded", () => {
 	new Responsive();
+	new LanguageScrollHandler();
 	new HorizontalScrollManager("horizontal-scroll-main-container", "horizontal-scroll-sticky-container", "horizontal-scroll");
 	new ScaleOnScrollManager("scale-on-scroll");
 	ThemeHandler.getInstance("changeTheme");

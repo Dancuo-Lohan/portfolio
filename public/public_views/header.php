@@ -1,24 +1,34 @@
 <?php
 
 use CorianderCore\Core\Support\PublicUrl;
+use Modules\Localization\Localization;
 
-$requestedView = isset($__corianderRequestedView) ? $__corianderRequestedView : 'home';
-$activeMenu = isset($menu) ? (string) $menu : $requestedView;
-$title = str_replace(['/', '-'], [' | ', ' '], $requestedView);
-$title = trim($title) !== '' ? $title : 'portfolio';
-
-$scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http';
-$host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
-$uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/';
-$fullUrl = $host !== '' ? $scheme . '://' . $host . $uri : $uri;
-
-$noIndexPages = [
-    'page-not-found',
+$requestedView = isset($__corianderRequestedView) ? $__corianderRequestedView : 'en/home';
+$currentLocale = Localization::localeFromViewPath($requestedView) ?? Localization::DEFAULT_LOCALE;
+$currentView = Localization::stripLocale($requestedView);
+$activeMenu = isset($menu) ? (string) $menu : Localization::activeMenu($requestedView);
+$labels = Localization::labels($currentLocale);
+$languageUrls = [
+    'fr' => Localization::switchPath($requestedView, 'fr'),
+    'en' => Localization::switchPath($requestedView, 'en'),
 ];
+
+if (!headers_sent()) {
+    setcookie('portfolio_locale', $currentLocale, [
+        'expires' => time() + 60 * 60 * 24 * 365,
+        'path' => '/',
+        'samesite' => 'Lax',
+    ]);
+}
+
+$metaDataPath = PROJECT_ROOT . '/public/public_views/' . $requestedView . '/metadata.php';
+if (file_exists($metaDataPath)) {
+    require_once $metaDataPath;
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= htmlspecialchars($currentLocale, ENT_QUOTES, 'UTF-8') ?>">
 
 <head>
     <meta charset="UTF-8">
@@ -26,29 +36,15 @@ $noIndexPages = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="<?= PublicUrl::versionedAsset('assets/img/favicon.png') ?>">
 
-    <?php if ($requestedView === 'home' && $uri !== '/') { ?>
-        <link rel="canonical" href="https://lohan.dancuo.fr/">
-    <?php } ?>
-
-    <title>Lohan Dancuo | <?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8') ?></title>
-    <?php if (in_array($requestedView, $noIndexPages, true)) { ?>
-        <meta name="robots" content="noindex">
-    <?php } ?>
-    <meta name="description" content="Meet Lohan Dancuo, a green-minded French web developer with over <?= date('Y') - 2021 ?> years of experience. Specializing in optimizing native code for minimal environmental impact, I combine my passion for technology with sustainable practices to create innovative, efficient web solutions.">
-    <meta name="keywords" content="Lohan Dancuo, Lohan, Dancuo, French web developer, green web development, sustainable coding, code optimization, web technology, innovative web solutions, carbon footprint reduction in coding, portfolio">
-
-    <meta property="og:title" content="Lohan Dancuo | <?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8') ?>">
-    <meta property="og:description" content="Discover Lohan's journey as a French web developer dedicated to sustainable coding practices. Explore projects that showcase innovative solutions with minimal environmental impact.">
-    <meta property="og:image" content="/assets/img/preview.png">
-    <meta property="og:image:alt" content="Preview of the portfolio.">
-    <meta property="og:url" content="<?= htmlspecialchars($fullUrl, ENT_QUOTES, 'UTF-8') ?>">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Lohan Dancuo | <?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8') ?>">
-    <meta name="twitter:description" content="Meet Lohan, a French web developer blending a passion for technology with sustainability. Check out my projects focused on reducing the environmental impact of coding.">
-    <meta name="twitter:image" content="/assets/img/preview.png">
-    <meta name="twitter:image:alt" content="Preview of the portfolio.">
-
+    <?php
+    if (isset($metadata)) {
+        echo $metadata;
+        echo PHP_EOL;
+    } else {
+        echo '<title>No configured title</title>';
+        echo '<meta name="description" content="No configured description.">';
+    }
+    ?>
     <link rel="stylesheet" href="<?= PublicUrl::versionedAsset('assets/css/output.css') ?>">
 </head>
 
@@ -59,17 +55,28 @@ $noIndexPages = [
             <nav class="md:max-w-screen-2xl w-full mx-auto relative flex justify-end md:h-16 h-14 pointer-events-auto">
                 <div class="flex sm:tracking-1 md:justify-end justify-around w-full">
                     <div class="w-auto flex">
-                        <a href="/home" title="Go to the Home Page" class="relative md:mr-12 block m-auto after:absolute after:content-[''] after:-bottom-[2px] md:after:-bottom-1 after:h-[2px] md:after:h-[3px] after:inset-x-0 after:mx-auto after:bg-dark-green dark:after:bg-accent-green <?= $activeMenu === 'home' ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-['width']" ?>">Home</a>
+                        <a href="<?= Localization::localizedPath('home', $currentLocale) ?>" title="<?= htmlspecialchars($labels['home'], ENT_QUOTES, 'UTF-8') ?>" class="relative md:mr-12 block m-auto after:absolute after:content-[''] after:-bottom-[2px] md:after:-bottom-1 after:h-[2px] md:after:h-[3px] after:inset-x-0 after:mx-auto after:bg-dark-green dark:after:bg-accent-green <?= $activeMenu === 'home' ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-['width']" ?>"><?= htmlspecialchars($labels['home'], ENT_QUOTES, 'UTF-8') ?></a>
                     </div>
                     <div class="w-auto flex">
-                        <a href="/my-work" title="View My Work and Projects" class="relative md:mr-12 block m-auto after:absolute after:content-[''] after:-bottom-[2px] md:after:-bottom-1 after:h-[2px] md:after:h-[3px] after:inset-x-0 after:mx-auto after:bg-dark-green dark:after:bg-accent-green <?= $activeMenu === 'my-work' ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-['width']" ?>">My work</a>
+                        <a href="<?= Localization::localizedPath('my-work', $currentLocale) ?>" title="<?= htmlspecialchars($labels['work'], ENT_QUOTES, 'UTF-8') ?>" class="relative md:mr-12 block m-auto after:absolute after:content-[''] after:-bottom-[2px] md:after:-bottom-1 after:h-[2px] md:after:h-[3px] after:inset-x-0 after:mx-auto after:bg-dark-green dark:after:bg-accent-green <?= $activeMenu === 'my-work' ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-['width']" ?>"><?= htmlspecialchars($labels['work'], ENT_QUOTES, 'UTF-8') ?></a>
                     </div>
                     <div class="w-auto flex">
-                        <a href="/contact-me" title="Get in Touch with Me" class="relative md:mr-12 block m-auto after:absolute after:content-[''] after:-bottom-[2px] md:after:-bottom-1 after:h-[2px] md:after:h-[3px] after:inset-x-0 after:mx-auto after:bg-dark-green dark:after:bg-accent-green <?= $activeMenu === 'contact-me' ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-['width']" ?>">Contact me</a>
+                        <a href="<?= Localization::localizedPath('contact-me', $currentLocale) ?>" title="<?= htmlspecialchars($labels['contact'], ENT_QUOTES, 'UTF-8') ?>" class="relative md:mr-12 block m-auto after:absolute after:content-[''] after:-bottom-[2px] md:after:-bottom-1 after:h-[2px] md:after:h-[3px] after:inset-x-0 after:mx-auto after:bg-dark-green dark:after:bg-accent-green <?= $activeMenu === 'contact-me' ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-['width']" ?>"><?= htmlspecialchars($labels['contact'], ENT_QUOTES, 'UTF-8') ?></a>
                     </div>
                     <div class="w-auto flex">
-                        <button id="changeTheme" class="relative w-8 h-8 md:w-10 md:h-10 my-auto md:mr-12 m-auto" title="Change page theme">
-                            <img src="/assets/img/moon.svg" height="44" width="44" class="hover:drop-shadow-black dark:hover:drop-shadow-white duration-300" alt="Logo representing current theme">
+                        <div class="md:mr-12 m-auto inline-flex items-center rounded-md border border-dark-green/30 bg-mint p-0.5 text-xs font-semibold uppercase tracking-1 text-dark-green dark:border-accent-green/40 dark:bg-black dark:text-accent-green sm:text-sm" aria-label="<?= htmlspecialchars($labels['language'], ENT_QUOTES, 'UTF-8') ?>">
+                            <?php foreach (['fr', 'en'] as $locale) { ?>
+                                <?php if ($locale === $currentLocale) { ?>
+                                    <span class="rounded bg-dark-green px-2 py-1 text-white dark:bg-accent-green dark:text-black" aria-current="true"><?= htmlspecialchars($locale, ENT_QUOTES, 'UTF-8') ?></span>
+                                <?php } else { ?>
+                                    <a href="<?= htmlspecialchars($languageUrls[$locale], ENT_QUOTES, 'UTF-8') ?>" hreflang="<?= htmlspecialchars($locale, ENT_QUOTES, 'UTF-8') ?>" data-language-switch class="rounded px-2 py-1 transition-colors hover:bg-dark-green/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-green dark:hover:bg-accent-green/10 dark:focus-visible:outline-accent-green"><?= htmlspecialchars($locale, ENT_QUOTES, 'UTF-8') ?></a>
+                                <?php } ?>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <div class="w-auto flex">
+                        <button id="changeTheme" class="relative w-8 h-8 md:w-10 md:h-10 my-auto md:mr-12 m-auto" title="<?= htmlspecialchars($labels['theme'], ENT_QUOTES, 'UTF-8') ?>">
+                            <img src="<?= PublicUrl::versionedAsset('assets/img/moon.svg') ?>" height="44" width="44" class="hover:drop-shadow-black dark:hover:drop-shadow-white duration-300" alt="<?= htmlspecialchars($labels['theme'], ENT_QUOTES, 'UTF-8') ?>">
                         </button>
                     </div>
                 </div>

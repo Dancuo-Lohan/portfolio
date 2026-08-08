@@ -1,43 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
   <url>
-    <loc>https://lohan.dancuo.fr/</loc>
-    <lastmod>2024-08-21T16:49:09+02:00</lastmod>
+    <loc>https://lohan.dancuo.fr/en/home</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/home" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/home" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lohan.dancuo.fr/en/home" />
+    <lastmod>2026-08-07</lastmod>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://lohan.dancuo.fr/my-work</loc>
-    <lastmod>2024-09-03T21:51:14+02:00</lastmod>
+    <loc>https://lohan.dancuo.fr/fr/home</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/home" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/home" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lohan.dancuo.fr/en/home" />
+    <lastmod>2026-08-07</lastmod>
+    <priority>1.00</priority>
+  </url>
+
+  <url>
+    <loc>https://lohan.dancuo.fr/en/my-work</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/my-work" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/my-work" />
+    <lastmod>2026-08-07</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://lohan.dancuo.fr/components/vertical-parallax</loc>
-    <lastmod>2024-09-05T23:51:14+02:00</lastmod>
+    <loc>https://lohan.dancuo.fr/fr/my-work</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/my-work" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/my-work" />
+    <lastmod>2026-08-07</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://lohan.dancuo.fr/en/case-studies/roomCalendars</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/case-studies/roomCalendars" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/case-studies/roomCalendars" />
+    <lastmod>2026-08-07</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://lohan.dancuo.fr/fr/case-studies/roomCalendars</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/case-studies/roomCalendars" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/case-studies/roomCalendars" />
+    <lastmod>2026-08-07</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://lohan.dancuo.fr/en/case-studies/corianderPHP</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/case-studies/corianderPHP" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/case-studies/corianderPHP" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lohan.dancuo.fr/en/case-studies/corianderPHP" />
+    <lastmod>2026-08-07</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://lohan.dancuo.fr/fr/case-studies/corianderPHP</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/case-studies/corianderPHP" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/case-studies/corianderPHP" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lohan.dancuo.fr/en/case-studies/corianderPHP" />
+    <lastmod>2026-08-07</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://lohan.dancuo.fr/en/components/vertical-parallax</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/components/vertical-parallax" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/components/vertical-parallax" />
+    <lastmod>2026-08-07</lastmod>
     <priority>0.60</priority>
   </url>
   <url>
-    <loc>https://lohan.dancuo.fr/case-studies/roomCalendars</loc>
-    <lastmod>2024-09-05T23:51:14+02:00</lastmod>
+    <loc>https://lohan.dancuo.fr/fr/components/vertical-parallax</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/components/vertical-parallax" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/components/vertical-parallax" />
+    <lastmod>2026-08-07</lastmod>
     <priority>0.60</priority>
   </url>
+
   <url>
-    <loc>https://lohan.dancuo.fr/contact-me</loc>
-    <lastmod>2024-08-21T16:49:09+02:00</lastmod>
-    <priority>0.80</priority>
+    <loc>https://lohan.dancuo.fr/en/contact-me</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/contact-me" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/contact-me" />
+    <lastmod>2026-08-07</lastmod>
+    <priority>0.70</priority>
   </url>
   <url>
-    <loc>https://lohan.dancuo.fr/legal-notice</loc>
-    <lastmod>2024-08-21T16:49:09+02:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://lohan.dancuo.fr/terms-and-conditions</loc>
-    <lastmod>2024-08-21T16:49:09+02:00</lastmod>
-    <priority>0.80</priority>
+    <loc>https://lohan.dancuo.fr/fr/contact-me</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/contact-me" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/contact-me" />
+    <lastmod>2026-08-07</lastmod>
+    <priority>0.70</priority>
   </url>
 
 </urlset>
