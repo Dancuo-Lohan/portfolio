@@ -11,6 +11,10 @@ $metadata = <<<'HTML'
 <meta property="og:title" content="Lohan Dancuo | Étude de cas CorianderPHP">
 <meta property="og:description" content="Comment j'ai construit CorianderPHP pour travailler le routing, la CLI, la base de données, les tests et les releases.">
 <meta property="og:image" content="/assets/img/case-studies/thumbnails-corianderPHP.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lohan Dancuo | Étude de cas CorianderPHP">
+<meta name="twitter:description" content="Projet personnel de R&D autour d'un framework PHP, de sa CLI, de ses tests et de son automatisation.">
+<meta name="twitter:image" content="/assets/img/case-studies/thumbnails-corianderPHP.png">
 HTML;
 
 $addViewInSitemap = true;
