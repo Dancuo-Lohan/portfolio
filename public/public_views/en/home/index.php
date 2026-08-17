@@ -109,7 +109,7 @@ $wallOfStacks = [
     <div class="absolute bottom-20 md:bottom-8 flex justify-center w-full">
         <a href="#Have-you-ever-wondered-what-drives-someone-to-become-a-web-developer" title="Scroll down to the next section" class="font-bold tracking-1 text-lg sm:text-xl hsm:text-xl md:text-2xl duration-300 hover:opacity-70">
             <p class="text-black dark:text-white">
-                Scroll down
+                Learn more
             </p>
             <svg class="w-10 md:w-12 h-10 md:h-12 mx-auto animate-slow-bounce" aria-hidden="true" width="34" height="20" viewBox="0 0 34 20" xmlns="http://www.w3.org/2000/svg">
                 <path class="fill-dark-green dark:fill-accent-green" d="M15.0831 18.4422C16.1434 19.5164 17.8653 19.5164 18.9255 18.4422L32.497 4.69219C33.5572 3.61798 33.5572 1.87344 32.497 0.799225C31.4367 -0.274994 29.7148 -0.274994 28.6545 0.799225L17.0001 12.607L5.34562 0.807818C4.28535 -0.266401 2.56348 -0.266401 1.50321 0.807818C0.442941 1.88204 0.442941 3.62657 1.50321 4.70079L15.0746 18.4508L15.0831 18.4422Z" />
