@@ -23,7 +23,7 @@
                 </a>
             </div>
 
-            <?= \CorianderCore\Core\Image\ImageHandler::render('/public/assets/img/case-studies/sansSuite/screenshot-sansSuite.png', [
+            <?= \CorianderCore\Core\Image\ImageHandler::render('/public/assets/img/case-studies/sansSuite/screenshot-sansSuite.jpg', [
                 'alt' => 'Vue d\'ensemble de l\'application Sans Suite.',
                 'pictureClass' => 'block w-full',
                 'class' => 'h-auto w-full rounded-lg border border-dark-green/15 object-contain object-top dark:border-accent-green/20',

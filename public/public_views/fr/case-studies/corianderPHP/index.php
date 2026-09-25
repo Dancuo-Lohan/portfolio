@@ -20,7 +20,7 @@
                 </p>
             </div>
 
-            <?= \CorianderCore\Core\Image\ImageHandler::render('/public/assets/img/case-studies/corianderPHP/screenshot-corianderPHP.png', [
+            <?= \CorianderCore\Core\Image\ImageHandler::render('/public/assets/img/case-studies/corianderPHP/screenshot-corianderPHP.jpg', [
                 'alt' => 'Capture du site de documentation CorianderPHP.',
                 'pictureClass' => 'block w-full',
                 'class' => 'h-auto w-full rounded-lg border border-dark-green/15 object-cover object-top dark:border-accent-green/20',
