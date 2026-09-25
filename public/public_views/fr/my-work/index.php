@@ -24,6 +24,18 @@ $caseStudies = [
             ['label' => "Lire l'étude de cas", 'href' => '/fr/case-studies/roomCalendars', 'primary' => true],
         ],
     ],
+    [
+        'type' => 'Étude de cas',
+        'title' => 'Sans Suite',
+        'summary' => "Une application locale conçue pour suivre mes candidatures, organiser les prochaines étapes et retrouver leur historique sans dépendre d'un tableur devenu difficile à lire.",
+        'context' => 'Application locale, SQLite, UX',
+        'image' => '/public/assets/img/case-studies/thumbnails-sansSuite.png',
+        'alt' => "Vue d'ensemble de l'application Sans Suite.",
+        'tags' => ['PHP', 'SQLite', 'TypeScript', 'CorianderPHP'],
+        'links' => [
+            ['label' => "Lire l'étude de cas", 'href' => '/fr/case-studies/sansSuite', 'primary' => true],
+        ],
+    ],
 ];
 
 $components = [

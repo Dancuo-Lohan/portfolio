@@ -24,6 +24,18 @@ $caseStudies = [
             ['label' => 'Read case study', 'href' => '/en/case-studies/roomCalendars', 'primary' => true],
         ],
     ],
+    [
+        'type' => 'Case study',
+        'title' => 'Sans Suite',
+        'summary' => 'A local application built to track my job applications, organize the next steps, and find their history without relying on a spreadsheet that had become difficult to read.',
+        'context' => 'Local application, SQLite, UX',
+        'image' => '/public/assets/img/case-studies/thumbnails-sansSuite.png',
+        'alt' => 'Overview of the Sans Suite application.',
+        'tags' => ['PHP', 'SQLite', 'TypeScript', 'CorianderPHP'],
+        'links' => [
+            ['label' => 'Read case study', 'href' => '/en/case-studies/sansSuite', 'primary' => true],
+        ],
+    ],
 ];
 
 $components = [
