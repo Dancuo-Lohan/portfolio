@@ -12,6 +12,8 @@ $languageUrls = [
     'fr' => Localization::switchPath($requestedView, 'fr'),
     'en' => Localization::switchPath($requestedView, 'en'),
 ];
+$targetLocale = $currentLocale === 'fr' ? 'en' : 'fr';
+$languageSwitchLabel = $currentLocale === 'fr' ? 'Passer en anglais' : 'Switch to French';
 
 if (!headers_sent()) {
     setcookie('portfolio_locale', $currentLocale, [
@@ -64,15 +66,15 @@ if (file_exists($metaDataPath)) {
                         <a href="<?= Localization::localizedPath('contact-me', $currentLocale) ?>" title="<?= htmlspecialchars($labels['contact'], ENT_QUOTES, 'UTF-8') ?>" class="relative md:mr-12 block m-auto after:absolute after:content-[''] after:-bottom-[2px] md:after:-bottom-1 after:h-[2px] md:after:h-[3px] after:inset-x-0 after:mx-auto after:bg-dark-green dark:after:bg-accent-green <?= $activeMenu === 'contact-me' ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-['width']" ?>"><?= htmlspecialchars($labels['contact'], ENT_QUOTES, 'UTF-8') ?></a>
                     </div>
                     <div class="w-auto flex">
-                        <div class="md:mr-12 m-auto inline-flex items-center rounded-md border border-dark-green/30 bg-mint p-0.5 text-xs font-semibold uppercase tracking-1 text-dark-green dark:border-accent-green/40 dark:bg-black dark:text-accent-green sm:text-sm" aria-label="<?= htmlspecialchars($labels['language'], ENT_QUOTES, 'UTF-8') ?>">
+                        <a href="<?= htmlspecialchars($languageUrls[$targetLocale], ENT_QUOTES, 'UTF-8') ?>" hreflang="<?= htmlspecialchars($targetLocale, ENT_QUOTES, 'UTF-8') ?>" data-language-switch class="group md:mr-12 m-auto inline-flex items-center rounded-md border border-dark-green/30 bg-mint p-0.5 text-xs font-semibold uppercase tracking-1 text-dark-green transition-colors hover:border-dark-green/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-green dark:border-accent-green/40 dark:bg-black dark:text-accent-green dark:hover:border-accent-green/70 dark:focus-visible:outline-accent-green sm:text-sm" aria-label="<?= htmlspecialchars($languageSwitchLabel, ENT_QUOTES, 'UTF-8') ?>" title="<?= htmlspecialchars($languageSwitchLabel, ENT_QUOTES, 'UTF-8') ?>">
                             <?php foreach (['fr', 'en'] as $locale) { ?>
                                 <?php if ($locale === $currentLocale) { ?>
                                     <span class="rounded bg-dark-green px-2 py-1 text-white dark:bg-accent-green dark:text-black" aria-current="true"><?= htmlspecialchars($locale, ENT_QUOTES, 'UTF-8') ?></span>
                                 <?php } else { ?>
-                                    <a href="<?= htmlspecialchars($languageUrls[$locale], ENT_QUOTES, 'UTF-8') ?>" hreflang="<?= htmlspecialchars($locale, ENT_QUOTES, 'UTF-8') ?>" data-language-switch class="rounded px-2 py-1 transition-colors hover:bg-dark-green/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-green dark:hover:bg-accent-green/10 dark:focus-visible:outline-accent-green"><?= htmlspecialchars($locale, ENT_QUOTES, 'UTF-8') ?></a>
+                                    <span class="rounded px-2 py-1 transition-colors group-hover:bg-dark-green/10 dark:group-hover:bg-accent-green/10"><?= htmlspecialchars($locale, ENT_QUOTES, 'UTF-8') ?></span>
                                 <?php } ?>
                             <?php } ?>
-                        </div>
+                        </a>
                     </div>
                     <div class="w-auto flex">
                         <button id="changeTheme" class="relative w-8 h-8 md:w-10 md:h-10 my-auto md:mr-12 m-auto" title="<?= htmlspecialchars($labels['theme'], ENT_QUOTES, 'UTF-8') ?>">
