@@ -85,14 +85,14 @@ $components = [
 
         <div class="mt-7 space-y-8">
             <?php foreach ($caseStudies as $index => $project) { ?>
-                <article data-clickable-card data-card-url="<?= htmlspecialchars($project['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="group/card relative grid grid-cols-[6.75rem_minmax(0,1fr)] cursor-pointer overflow-hidden border-y border-dark-green/25 bg-true-white/70 focus-within:outline focus-within:outline-2 focus-within:outline-offset-[-4px] focus-within:outline-dark-green dark:border-accent-green/25 dark:bg-true-black/45 dark:focus-within:outline-accent-green sm:grid-cols-[8rem_minmax(0,1fr)] md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]">
+                <article data-clickable-card data-card-url="<?= htmlspecialchars($project['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="group/card relative grid cursor-pointer overflow-hidden border-y border-dark-green/25 bg-true-white/70 px-4 pb-4 focus-within:outline focus-within:outline-2 focus-within:outline-offset-[-4px] focus-within:outline-dark-green dark:border-accent-green/25 dark:bg-true-black/45 dark:focus-within:outline-accent-green md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] md:px-0 md:pb-0">
                         <span class="pointer-events-none absolute inset-y-0 -left-32 -right-32 z-20 hidden translate-x-full bg-gradient-to-l from-dark-green/95 via-dark-green/85 to-transparent opacity-0 transition duration-300 ease-in-out group-hover/card:translate-x-0 group-hover/card:opacity-100 group-focus-within/card:translate-x-0 group-focus-within/card:opacity-100 dark:from-accent-green/95 dark:via-accent-green/80 lg:block" aria-hidden="true"></span>
 
-                        <span class="relative z-10 block min-h-full overflow-hidden border-r border-dark-green/15 bg-black/5 dark:border-accent-green/20 dark:bg-white/5">
+                        <span class="relative z-10 order-3 mt-4 block aspect-[16/10] w-[84%] justify-self-center overflow-hidden rounded-xl md:order-none md:col-start-1 md:row-start-1 md:mt-0 md:aspect-auto md:min-h-full md:w-auto md:justify-self-stretch md:rounded-none md:border-r md:border-dark-green/15 md:bg-black/5 dark:md:border-accent-green/20 dark:md:bg-white/5">
                             <?= \CorianderCore\Core\Image\ImageHandler::render($project['image'], [
                                 'alt' => $project['alt'],
-                                'pictureClass' => 'block h-full w-full',
-                                'class' => 'h-full w-full object-contain object-center p-2 transition duration-300 group-hover/card:opacity-80 sm:p-3 md:p-4',
+                                'pictureClass' => 'block h-full w-full overflow-hidden rounded-xl md:rounded-none',
+                                'class' => 'h-full w-full rounded-xl object-contain object-center transition duration-300 group-hover/card:opacity-80 md:rounded-none md:p-4',
                                 'quality' => $project['quality'] ?? 80,
                                 'loading' => 'lazy',
                                 'decoding' => 'async',
@@ -100,9 +100,9 @@ $components = [
                             ]) ?>
                         </span>
 
-                        <span class="relative z-30 grid gap-4 p-4 sm:p-5 lg:grid-cols-[minmax(0,1fr)_10rem] lg:gap-6 lg:p-8">
-                            <span class="min-w-0">
-                                <span class="flex flex-wrap items-center gap-2">
+                        <span class="contents md:relative md:z-30 md:col-start-2 md:row-start-1 md:grid md:gap-4 md:p-5 lg:grid-cols-[minmax(0,1fr)_10rem] lg:gap-6 lg:p-8">
+                            <span class="contents md:block md:min-w-0">
+                                <span class="order-1 mt-4 flex flex-wrap items-center gap-2 md:mt-0">
                                     <span class="rounded-md bg-true-white/60 px-2 py-0.5 font-concert-one text-xs uppercase tracking-1 text-dark-green transition duration-300 dark:bg-true-black/60 dark:text-accent-green">
                                         <?= htmlspecialchars($project['type'], ENT_QUOTES, 'UTF-8') ?>
                                     </span>
@@ -112,14 +112,14 @@ $components = [
                                     </span>
                                 </span>
 
-                                <span class="mt-2 block font-concert-one text-2xl tracking-1 text-dark-green [text-shadow:1px_0_0_rgb(255_255_255_/_60%),-1px_0_0_rgb(255_255_255_/_60%),0_1px_0_rgb(255_255_255_/_60%),0_-1px_0_rgb(255_255_255_/_60%)] transition duration-300 dark:text-accent-green dark:[text-shadow:1px_0_0_rgb(0_0_0_/_60%),-1px_0_0_rgb(0_0_0_/_60%),0_1px_0_rgb(0_0_0_/_60%),0_-1px_0_rgb(0_0_0_/_60%)] sm:text-3xl md:text-4xl lg:group-hover/card:text-white lg:group-focus-within/card:text-white dark:lg:group-hover/card:text-black dark:lg:group-focus-within/card:text-black">
+                                <span class="order-2 mt-2 block font-concert-one text-2xl tracking-1 text-dark-green [text-shadow:1px_0_0_rgb(255_255_255_/_60%),-1px_0_0_rgb(255_255_255_/_60%),0_1px_0_rgb(255_255_255_/_60%),0_-1px_0_rgb(255_255_255_/_60%)] transition duration-300 dark:text-accent-green dark:[text-shadow:1px_0_0_rgb(0_0_0_/_60%),-1px_0_0_rgb(0_0_0_/_60%),0_1px_0_rgb(0_0_0_/_60%),0_-1px_0_rgb(0_0_0_/_60%)] sm:text-3xl md:text-4xl lg:group-hover/card:text-white lg:group-focus-within/card:text-white dark:lg:group-hover/card:text-black dark:lg:group-focus-within/card:text-black">
                                     <?= htmlspecialchars($project['title'], ENT_QUOTES, 'UTF-8') ?>
                                 </span>
-                                <span class="mt-2 block max-w-3xl text-sm !leading-normal text-black/75 transition duration-300 dark:text-white/75 sm:text-base lg:mt-4 lg:group-hover/card:text-white/80 lg:group-focus-within/card:text-white/80 dark:lg:group-hover/card:text-black/80 dark:lg:group-focus-within/card:text-black/80">
+                                <span class="order-4 mt-4 block max-w-3xl text-sm !leading-normal text-black/75 transition duration-300 dark:text-white/75 sm:text-base md:mt-2 lg:mt-4 lg:group-hover/card:text-white/80 lg:group-focus-within/card:text-white/80 dark:lg:group-hover/card:text-black/80 dark:lg:group-focus-within/card:text-black/80">
                                     <?= htmlspecialchars($project['summary'], ENT_QUOTES, 'UTF-8') ?>
                                 </span>
 
-                                <a href="<?= htmlspecialchars($project['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="mt-4 inline-flex rounded-md bg-dark-green px-3 py-2 text-sm font-semibold text-white transition dark:bg-accent-green dark:text-black lg:hidden">
+                                <a href="<?= htmlspecialchars($project['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="order-5 mt-4 inline-flex w-fit rounded-md bg-dark-green px-3 py-2 text-sm font-semibold text-white transition dark:bg-accent-green dark:text-black lg:hidden">
                                     <?= htmlspecialchars($project['links'][0]['label'], ENT_QUOTES, 'UTF-8') ?>
                                 </a>
                             </span>
@@ -163,12 +163,12 @@ $components = [
                 <article data-clickable-card data-card-url="<?= htmlspecialchars($component['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="group relative block cursor-pointer overflow-hidden border-y border-dark-green/25 bg-true-white/70 transition duration-300 hover:border-dark-green/45 focus-within:outline focus-within:outline-2 focus-within:outline-offset-[-4px] focus-within:outline-dark-green dark:border-accent-green/25 dark:bg-true-black/45 dark:hover:border-accent-green/45 dark:focus-within:outline-accent-green">
                         <span class="pointer-events-none absolute inset-y-0 -left-32 -right-32 z-20 hidden -translate-x-full bg-gradient-to-r from-dark-green/95 via-dark-green/85 to-transparent opacity-0 transition duration-300 ease-in-out group-hover:translate-x-0 group-hover:opacity-100 group-focus-within:translate-x-0 group-focus-within:opacity-100 dark:from-accent-green/95 dark:via-accent-green/80 lg:block" aria-hidden="true"></span>
 
-                        <span class="grid grid-cols-[6.75rem_minmax(0,1fr)] sm:grid-cols-[8rem_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_20rem]">
-                            <span class="relative z-10 block min-h-full overflow-hidden border-r border-dark-green/15 bg-black/5 dark:border-accent-green/20 dark:bg-white/5 lg:order-2 lg:border-l lg:border-r-0">
+                        <span class="grid px-4 pb-4 md:grid-cols-[minmax(0,1fr)_20rem] md:px-0 md:pb-0">
+                            <span class="relative z-10 order-3 mt-4 block aspect-[16/10] w-[84%] justify-self-center overflow-hidden rounded-xl md:order-2 md:mt-0 md:aspect-auto md:min-h-full md:w-auto md:justify-self-stretch md:rounded-none md:border-l md:border-dark-green/15 md:bg-black/5 dark:md:border-accent-green/20 dark:md:bg-white/5">
                                 <?= \CorianderCore\Core\Image\ImageHandler::render($component['image'], [
                                     'alt' => $component['alt'],
-                                    'pictureClass' => 'block h-full w-full',
-                                    'class' => 'h-full w-full object-contain object-center p-2 sm:p-3 lg:p-4 ' . ($component['imageClass'] ?? ''),
+                                    'pictureClass' => 'block h-full w-full overflow-hidden rounded-xl md:rounded-none',
+                                    'class' => 'h-full w-full rounded-xl object-contain object-center md:rounded-none md:p-4 ' . ($component['imageClass'] ?? ''),
                                     'quality' => $component['quality'] ?? 80,
                                     'loading' => 'lazy',
                                     'decoding' => 'async',
@@ -176,8 +176,8 @@ $components = [
                                 ]) ?>
                             </span>
 
-                            <span class="relative z-30 block min-w-0 p-4 sm:p-5 lg:p-8">
-                                <span class="flex flex-wrap items-center gap-2">
+                            <span class="contents md:relative md:z-30 md:order-1 md:block md:min-w-0 md:p-5 lg:p-8">
+                                <span class="order-1 mt-4 flex flex-wrap items-center gap-2 md:mt-0">
                                     <span class="rounded-md bg-true-white/60 px-2 py-0.5 font-concert-one text-xs uppercase tracking-1 text-dark-green transition duration-300 dark:bg-true-black/60 dark:text-accent-green">
                                         <?= htmlspecialchars($component['type'], ENT_QUOTES, 'UTF-8') ?>
                                     </span>
@@ -187,14 +187,14 @@ $components = [
                                     </span>
                                 </span>
 
-                                <span class="mt-2 block font-concert-one text-2xl tracking-1 text-dark-green [text-shadow:1px_0_0_rgb(255_255_255_/_60%),-1px_0_0_rgb(255_255_255_/_60%),0_1px_0_rgb(255_255_255_/_60%),0_-1px_0_rgb(255_255_255_/_60%)] transition duration-300 dark:text-accent-green dark:[text-shadow:1px_0_0_rgb(0_0_0_/_60%),-1px_0_0_rgb(0_0_0_/_60%),0_1px_0_rgb(0_0_0_/_60%),0_-1px_0_rgb(0_0_0_/_60%)] sm:text-3xl md:text-4xl lg:mt-5 lg:group-hover:text-white lg:group-focus-within:text-white dark:lg:group-hover:text-black dark:lg:group-focus-within:text-black">
+                                <span class="order-2 mt-2 block font-concert-one text-2xl tracking-1 text-dark-green [text-shadow:1px_0_0_rgb(255_255_255_/_60%),-1px_0_0_rgb(255_255_255_/_60%),0_1px_0_rgb(255_255_255_/_60%),0_-1px_0_rgb(255_255_255_/_60%)] transition duration-300 dark:text-accent-green dark:[text-shadow:1px_0_0_rgb(0_0_0_/_60%),-1px_0_0_rgb(0_0_0_/_60%),0_1px_0_rgb(0_0_0_/_60%),0_-1px_0_rgb(0_0_0_/_60%)] sm:text-3xl md:text-4xl lg:mt-5 lg:group-hover:text-white lg:group-focus-within:text-white dark:lg:group-hover:text-black dark:lg:group-focus-within:text-black">
                                     <?= htmlspecialchars($component['title'], ENT_QUOTES, 'UTF-8') ?>
                                 </span>
-                                <span class="mt-2 block max-w-3xl text-sm !leading-normal text-black/75 transition duration-300 dark:text-white/75 sm:text-base lg:mt-3 lg:group-hover:text-white/80 lg:group-focus-within:text-white/80 dark:lg:group-hover:text-black/80 dark:lg:group-focus-within:text-black/80">
+                                <span class="order-4 mt-4 block max-w-3xl text-sm !leading-normal text-black/75 transition duration-300 dark:text-white/75 sm:text-base lg:mt-3 lg:group-hover:text-white/80 lg:group-focus-within:text-white/80 dark:lg:group-hover:text-black/80 dark:lg:group-focus-within:text-black/80">
                                     <?= htmlspecialchars($component['summary'], ENT_QUOTES, 'UTF-8') ?>
                                 </span>
 
-                                <span class="mt-4 flex flex-wrap items-center gap-3 lg:mt-6">
+                                <span class="order-5 mt-4 flex flex-wrap items-center gap-3 lg:mt-6">
                                     <a href="<?= htmlspecialchars($component['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="inline-flex whitespace-nowrap rounded-md bg-dark-green px-3 py-2 text-sm font-semibold text-white transition duration-300 dark:bg-accent-green dark:text-black lg:group-hover:bg-mint lg:group-hover:text-dark-green lg:group-focus-within:bg-mint lg:group-focus-within:text-dark-green dark:lg:group-hover:bg-black dark:lg:group-hover:text-accent-green dark:lg:group-focus-within:bg-black dark:lg:group-focus-within:text-accent-green">
                                         <?= htmlspecialchars($component['links'][0]['label'], ENT_QUOTES, 'UTF-8') ?>
                                     </a>
