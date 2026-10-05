@@ -61,8 +61,8 @@ try {
     $router->addMiddleware(new SecurityHeadersMiddleware([
         'Content-Security-Policy' => implode('; ', [
             "default-src 'self'",
-            "script-src 'self' https://unpkg.com https://analytics.pronoesports.com",
-            "connect-src 'self' https://api.websitecarbon.com https://analytics.pronoesports.com",
+            "script-src 'self' https://unpkg.com https://analytics.corianderphp.com",
+            "connect-src 'self' https://api.websitecarbon.com https://analytics.corianderphp.com",
             "style-src 'self' 'unsafe-inline'",
             "base-uri 'self'",
             "frame-ancestors 'none'",

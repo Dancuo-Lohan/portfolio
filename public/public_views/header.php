@@ -48,7 +48,7 @@ if (file_exists($metaDataPath)) {
     }
     ?>
     <link rel="stylesheet" href="<?= PublicUrl::versionedAsset('assets/css/output.css') ?>">
-    <script defer src="https://analytics.pronoesports.com/script.js" data-website-id="ec2dddd0-2c88-44e2-910d-18f88ceeb5fa"></script>
+    <script defer src="https://analytics.corianderphp.com/script.js" data-website-id="ec2dddd0-2c88-44e2-910d-18f88ceeb5fa"></script>
 </head>
 
 <body id="<?= htmlspecialchars(str_replace('/', '-', $requestedView), ENT_QUOTES, 'UTF-8') ?>" class="bg-mint dark:bg-black w-full absolute min-h-full scrollbar text-black dark:text-white">
