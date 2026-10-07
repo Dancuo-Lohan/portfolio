@@ -11,6 +11,7 @@
             <div>
                 <p class="font-concert-one text-sm uppercase tracking-1 text-dark-green dark:text-accent-green">
                     Case study
+                    <span class="ml-2 font-poppins text-xs font-medium normal-case text-black/60 dark:text-white/60">&middot; 2026</span>
                 </p>
                 <h1 class="mt-2 font-concert-one text-4xl tracking-1 text-dark-green dark:text-accent-green sm:text-6xl">
                     Sans Suite

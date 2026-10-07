@@ -7,9 +7,9 @@ $metadata = <<<'HTML'
 <link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/home">
 <link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/home">
 <link rel="alternate" hreflang="x-default" href="https://lohan.dancuo.fr/en/home">
-<meta name="description" content="Développeur fullstack orienté applications internes, outils métier et interfaces utiles au quotidien.">
+<meta name="description" content="Lohan Dancuo, développeur fullstack. Parcours professionnel, projets PHP et TypeScript, applications métier et outils internes conçus avec leurs utilisateurs.">
 <meta property="og:title" content="Lohan Dancuo | Développeur fullstack">
-<meta property="og:description" content="Je développe des applications internes adaptées aux usages métier et aux besoins du terrain.">
+<meta property="og:description" content="Mon parcours, mes projets et ma façon de développer des applications métier avec leurs utilisateurs.">
 <meta property="og:image" content="/assets/img/preview.png">
 <meta property="og:image:alt" content="Aperçu du portfolio.">
 <meta name="twitter:card" content="summary_large_image">

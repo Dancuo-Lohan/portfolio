@@ -4,7 +4,7 @@ $website = '<a href="/en/home" class="underline underline-offset-2 text-dark-gre
 
 <div class="w-8/12 mx-auto relative pt-16 font-poppins">
     <h1 class="font-bold tracking-2 text-3xl">Terms and Conditions for <?= $website ?></h1>
-    <p class="mt-2 text-lg">Last updated: 9th August 2024</p>
+    <p class="mt-2 text-lg">Last updated: 6 October 2026</p>
 
     <p class="mt-4">
         Welcome to my portfolio. By accessing and using <?= $website ?>,
@@ -39,6 +39,7 @@ $website = '<a href="/en/home" class="underline underline-offset-2 text-dark-gre
     <p class="mt-4">
         <?= $website ?> uses only functional cookies, especially to keep the selected language and ensure the website works correctly. These cookies are not used for advertising.
     </p>
+    <p class="mt-4">Umami also provides cookieless audience measurement. The collected information, retention period and opt-out control are described in the <a href="/en/legal-notice#privacy" class="text-dark-green underline underline-offset-4 dark:text-accent-green">legal notice and privacy information</a>.</p>
 
     <h2 class="mt-12 text-xl font-bold tracking-2">7. Applicable Law and Jurisdiction</h2>
     <p class="mt-4">

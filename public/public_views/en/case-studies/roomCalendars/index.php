@@ -11,6 +11,7 @@
             <div>
                 <p class="font-concert-one text-sm uppercase tracking-1 text-dark-green dark:text-accent-green">
                     Case study
+                    <span class="ml-2 font-poppins text-xs font-medium normal-case text-black/60 dark:text-white/60">&middot; 2024</span>
                 </p>
                 <h1 class="mt-2 font-concert-one text-4xl tracking-1 text-dark-green dark:text-accent-green sm:text-6xl">
                     Room Calendars
@@ -24,7 +25,7 @@
                 'alt' => 'Mockup of the Room Calendars application.',
                 'pictureClass' => 'block w-full',
                 'class' => 'h-auto w-full rounded-lg border border-dark-green/15 object-cover object-top dark:border-accent-green/20',
-                'loading' => 'lazy',
+                'loading' => 'eager',
                 'decoding' => 'async',
                 'draggable' => 'false',
             ]) ?>

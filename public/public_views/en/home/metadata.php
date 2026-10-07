@@ -7,9 +7,9 @@ $metadata = <<<'HTML'
 <link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/home">
 <link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/home">
 <link rel="alternate" hreflang="x-default" href="https://lohan.dancuo.fr/en/home">
-<meta name="description" content="Fullstack developer focused on internal applications, business tools, and interfaces people use every day.">
+<meta name="description" content="Lohan Dancuo, fullstack developer. Professional experience, PHP and TypeScript projects, and internal business applications designed with their users.">
 <meta property="og:title" content="Lohan Dancuo | Fullstack Developer">
-<meta property="og:description" content="I build internal web applications shaped around business needs and real day-to-day use.">
+<meta property="og:description" content="My experience, projects and approach to building business applications with the people who use them.">
 <meta property="og:image" content="/assets/img/preview.png">
 <meta property="og:image:alt" content="Preview of the portfolio.">
 <meta name="twitter:card" content="summary_large_image">

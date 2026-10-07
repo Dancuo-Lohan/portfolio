@@ -30,7 +30,7 @@ if (file_exists($metaDataPath)) {
 ?>
 
 <!DOCTYPE html>
-<html lang="<?= htmlspecialchars($currentLocale, ENT_QUOTES, 'UTF-8') ?>">
+<html lang="<?= htmlspecialchars($currentLocale, ENT_QUOTES, 'UTF-8') ?>" class="motion-reduce:scroll-auto">
 
 <head>
     <meta charset="UTF-8">
@@ -48,43 +48,34 @@ if (file_exists($metaDataPath)) {
     }
     ?>
     <link rel="stylesheet" href="<?= PublicUrl::versionedAsset('assets/css/output.css') ?>">
-    <script defer src="https://analytics.corianderphp.com/script.js" data-website-id="ec2dddd0-2c88-44e2-910d-18f88ceeb5fa"></script>
+    <script defer src="https://analytics.corianderphp.com/script.js" data-website-id="ec2dddd0-2c88-44e2-910d-18f88ceeb5fa" data-exclude-search="true" data-exclude-hash="true" data-do-not-track="true"></script>
 </head>
 
 <body id="<?= htmlspecialchars(str_replace('/', '-', $requestedView), ENT_QUOTES, 'UTF-8') ?>" class="bg-mint dark:bg-black w-full absolute min-h-full scrollbar text-black dark:text-white">
 
-    <header class="md:w-full w-screen fixed md:sticky md:top-0 h-auto bottom-0 z-50 font-concert-one pointer-events-none flex md:flex-col flex-col-reverse">
-        <div class="w-full md:text-2xl sm:text-xl text-lg md:border-b-2 md:border-t-0 border-t-2 border-dark-green dark:border-accent-green bg-white dark:bg-black">
-            <nav class="md:max-w-screen-2xl w-full mx-auto relative flex justify-end md:h-16 h-14 pointer-events-auto">
-                <div class="flex sm:tracking-1 md:justify-end justify-around w-full">
-                    <div class="w-auto flex">
-                        <a href="<?= Localization::localizedPath('home', $currentLocale) ?>" title="<?= htmlspecialchars($labels['home'], ENT_QUOTES, 'UTF-8') ?>" class="relative md:mr-12 block m-auto after:absolute after:content-[''] after:-bottom-[2px] md:after:-bottom-1 after:h-[2px] md:after:h-[3px] after:inset-x-0 after:mx-auto after:bg-dark-green dark:after:bg-accent-green <?= $activeMenu === 'home' ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-['width']" ?>"><?= htmlspecialchars($labels['home'], ENT_QUOTES, 'UTF-8') ?></a>
-                    </div>
-                    <div class="w-auto flex">
-                        <a href="<?= Localization::localizedPath('my-work', $currentLocale) ?>" title="<?= htmlspecialchars($labels['work'], ENT_QUOTES, 'UTF-8') ?>" class="relative md:mr-12 block m-auto after:absolute after:content-[''] after:-bottom-[2px] md:after:-bottom-1 after:h-[2px] md:after:h-[3px] after:inset-x-0 after:mx-auto after:bg-dark-green dark:after:bg-accent-green <?= $activeMenu === 'my-work' ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-['width']" ?>"><?= htmlspecialchars($labels['work'], ENT_QUOTES, 'UTF-8') ?></a>
-                    </div>
-                    <div class="w-auto flex">
-                        <a href="<?= Localization::localizedPath('contact-me', $currentLocale) ?>" title="<?= htmlspecialchars($labels['contact'], ENT_QUOTES, 'UTF-8') ?>" class="relative md:mr-12 block m-auto after:absolute after:content-[''] after:-bottom-[2px] md:after:-bottom-1 after:h-[2px] md:after:h-[3px] after:inset-x-0 after:mx-auto after:bg-dark-green dark:after:bg-accent-green <?= $activeMenu === 'contact-me' ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-['width']" ?>"><?= htmlspecialchars($labels['contact'], ENT_QUOTES, 'UTF-8') ?></a>
-                    </div>
-                    <div class="w-auto flex">
-                        <a href="<?= htmlspecialchars($languageUrls[$targetLocale], ENT_QUOTES, 'UTF-8') ?>" hreflang="<?= htmlspecialchars($targetLocale, ENT_QUOTES, 'UTF-8') ?>" data-language-switch class="group md:mr-12 m-auto inline-flex items-center rounded-md border border-dark-green/30 bg-mint p-0.5 text-xs font-semibold uppercase tracking-1 text-dark-green transition-colors hover:border-dark-green/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-green dark:border-accent-green/40 dark:bg-black dark:text-accent-green dark:hover:border-accent-green/70 dark:focus-visible:outline-accent-green sm:text-sm" aria-label="<?= htmlspecialchars($languageSwitchLabel, ENT_QUOTES, 'UTF-8') ?>" title="<?= htmlspecialchars($languageSwitchLabel, ENT_QUOTES, 'UTF-8') ?>">
-                            <?php foreach (['fr', 'en'] as $locale) { ?>
-                                <?php if ($locale === $currentLocale) { ?>
-                                    <span class="rounded bg-dark-green px-2 py-1 text-white dark:bg-accent-green dark:text-black" aria-current="true"><?= htmlspecialchars($locale, ENT_QUOTES, 'UTF-8') ?></span>
-                                <?php } else { ?>
-                                    <span class="rounded px-2 py-1 transition-colors group-hover:bg-dark-green/10 dark:group-hover:bg-accent-green/10"><?= htmlspecialchars($locale, ENT_QUOTES, 'UTF-8') ?></span>
-                                <?php } ?>
-                            <?php } ?>
+    <a href="#main-content" class="fixed left-3 top-3 z-[60] -translate-y-24 rounded-md bg-dark-green px-4 py-3 font-poppins text-sm font-semibold text-white focus:translate-y-0 dark:bg-accent-green dark:text-black"><?= $currentLocale === 'fr' ? 'Aller au contenu' : 'Skip to content' ?></a>
+    <header class="fixed bottom-0 z-50 w-full font-concert-one md:sticky md:top-0 md:bottom-auto">
+        <div class="border-t-2 border-dark-green bg-white dark:border-accent-green dark:bg-black md:border-b md:border-t-0">
+            <nav class="mx-auto flex h-16 w-full max-w-6xl items-center gap-1 px-2 sm:gap-3 sm:px-5 md:gap-6 md:px-8 lg:px-10" aria-label="<?= $currentLocale === 'fr' ? 'Navigation principale' : 'Main navigation' ?>">
+                <a href="<?= Localization::localizedPath('home', $currentLocale) ?>" class="mr-auto hidden min-h-11 items-center text-xl text-dark-green focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 dark:text-accent-green md:inline-flex">Lohan Dancuo<span class="text-black dark:text-white">.</span></a>
+                <div class="flex min-w-0 flex-1 items-center justify-around gap-1 md:flex-none md:gap-6">
+                    <?php foreach (['home' => 'home', 'my-work' => 'work', 'contact-me' => 'contact'] as $view => $label) { ?>
+                        <a href="<?= Localization::localizedPath($view, $currentLocale) ?>" class="relative inline-flex min-h-11 items-center whitespace-nowrap px-1 text-sm text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 dark:text-white sm:text-base md:text-lg after:absolute after:bottom-1 after:inset-x-1 after:h-0.5 after:bg-dark-green dark:after:bg-accent-green <?= $activeMenu === $view ? 'after:block' : 'after:hidden hover:after:block' ?>" <?= $currentView === $view ? 'aria-current="page"' : '' ?>>
+                            <span class="md:hidden"><?= htmlspecialchars($label === 'work' ? ($currentLocale === 'fr' ? 'Projets' : 'Projects') : ($label === 'contact' ? 'Contact' : $labels[$label]), ENT_QUOTES, 'UTF-8') ?></span>
+                            <span class="hidden md:inline"><?= htmlspecialchars($labels[$label], ENT_QUOTES, 'UTF-8') ?></span>
                         </a>
-                    </div>
-                    <div class="w-auto flex">
-                        <button id="changeTheme" class="relative w-8 h-8 md:w-10 md:h-10 my-auto md:mr-12 m-auto" title="<?= htmlspecialchars($labels['theme'], ENT_QUOTES, 'UTF-8') ?>">
-                            <img src="<?= PublicUrl::versionedAsset('assets/img/moon.svg') ?>" height="44" width="44" class="hover:drop-shadow-black dark:hover:drop-shadow-white duration-300" alt="<?= htmlspecialchars($labels['theme'], ENT_QUOTES, 'UTF-8') ?>">
-                        </button>
-                    </div>
+                    <?php } ?>
                 </div>
+                <a href="<?= htmlspecialchars($languageUrls[$targetLocale], ENT_QUOTES, 'UTF-8') ?>" hreflang="<?= htmlspecialchars($targetLocale, ENT_QUOTES, 'UTF-8') ?>" data-language-switch class="group inline-flex min-h-11 shrink-0 items-center rounded-md border border-dark-green/25 bg-mint p-0.5 font-poppins text-xs font-semibold uppercase text-dark-green transition-colors hover:border-dark-green/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 dark:border-accent-green/30 dark:bg-black dark:text-accent-green dark:hover:border-accent-green/70 sm:text-sm" aria-label="<?= htmlspecialchars($languageSwitchLabel, ENT_QUOTES, 'UTF-8') ?>" title="<?= htmlspecialchars($languageSwitchLabel, ENT_QUOTES, 'UTF-8') ?>">
+                    <?php foreach (['fr', 'en'] as $locale) { ?>
+                        <span class="rounded px-1.5 py-2 sm:px-2 <?= $locale === $currentLocale ? 'bg-dark-green text-white dark:bg-accent-green dark:text-black' : 'transition-colors group-hover:bg-dark-green/10 dark:group-hover:bg-accent-green/10' ?>" <?= $locale === $currentLocale ? 'aria-current="true"' : '' ?>><?= htmlspecialchars($locale, ENT_QUOTES, 'UTF-8') ?></span>
+                    <?php } ?>
+                </a>
+                <button id="changeTheme" class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md transition-colors hover:bg-dark-green/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 dark:hover:bg-accent-green/10" aria-label="<?= htmlspecialchars($labels['theme'], ENT_QUOTES, 'UTF-8') ?>" title="<?= htmlspecialchars($labels['theme'], ENT_QUOTES, 'UTF-8') ?>">
+                    <img src="<?= PublicUrl::versionedAsset('assets/img/moon.svg') ?>" height="28" width="28" class="h-7 w-7" alt="">
+                </button>
             </nav>
         </div>
     </header>
 
-    <section id="main-content" class="relative w-full inset-x-0 mx-auto pb-16 mb-[222px] sm:mb-[254px] md:mb-[134px] font-poppins">
+    <main id="main-content" tabindex="-1" class="relative w-full inset-x-0 mx-auto pb-16 mb-[222px] sm:mb-[254px] md:mb-[134px] font-poppins focus:outline-none">

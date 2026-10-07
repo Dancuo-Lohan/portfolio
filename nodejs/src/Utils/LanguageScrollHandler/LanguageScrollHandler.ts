@@ -3,6 +3,8 @@ type SavedLanguageScroll = {
 	scrollTop: number;
 	ratio: number;
 	createdAt: number;
+	anchorId?: string;
+	anchorOffset?: number;
 };
 
 export class LanguageScrollHandler {
@@ -41,6 +43,13 @@ export class LanguageScrollHandler {
 			createdAt: Date.now(),
 		};
 
+		const anchors = Array.from(document.querySelectorAll<HTMLElement>("#main-content [data-language-scroll-anchor]"));
+		const anchor = anchors.filter((element) => element.getBoundingClientRect().top <= window.innerHeight / 4).pop();
+		if (anchor) {
+			payload.anchorId = anchor.id;
+			payload.anchorOffset = anchor.getBoundingClientRect().top;
+		}
+
 		try {
 			window.sessionStorage.setItem(this.storageKey, JSON.stringify(payload));
 		} catch {
@@ -64,7 +73,11 @@ export class LanguageScrollHandler {
 		const restoreScroll = () => {
 			const maxScroll = this.getMaxScroll();
 			const ratioScroll = Math.round(maxScroll * Math.min(1, Math.max(0, savedScroll.ratio)));
-			const targetScroll = Math.min(maxScroll, Math.max(0, ratioScroll || savedScroll.scrollTop));
+			const anchor = savedScroll.anchorId ? document.getElementById(savedScroll.anchorId) : null;
+			const anchorScroll = anchor && typeof savedScroll.anchorOffset === "number"
+				? this.getScrollTop() + anchor.getBoundingClientRect().top - savedScroll.anchorOffset
+				: null;
+			const targetScroll = Math.min(maxScroll, Math.max(0, anchorScroll ?? (ratioScroll || savedScroll.scrollTop)));
 			const previousHtmlBehavior = document.documentElement.style.scrollBehavior;
 			const previousBodyBehavior = document.body.style.scrollBehavior;
 

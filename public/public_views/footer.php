@@ -9,13 +9,13 @@ $currentView = Localization::stripLocale($requestedView);
 $labels = Localization::labels($currentLocale);
 $scriptPath = 'assets/js/' . $currentView . '/index.js';
 ?>
-</section>
+</main>
 <footer id="footer" class="w-full absolute bottom-0 h-auto border-t-2 border-dark-green dark:border-accent-green bg-white dark:bg-black">
     <div class="relative w-full max-w-screen-2xl text-center m-auto h-full inset-x-0 font-poppins md:text-lg sm:text-lg text-sm pb-2 md:pb-0">
         <div class="sm:pt-4 md:pb-4 pb-16 flex sm:flex-col flex-col-reverse">
-            <div id="wcb" class="carbonbadge mx-auto dark:first sm:pt-0 pt-2"></div>
+            <div id="wcb" class="carbonbadge mx-auto dark:first sm:pt-0 pt-2" <?= $currentView === 'home' ? 'hidden' : '' ?>></div>
             <div class="flex md:flex-row md:justify-center md:gap-8 gap-1 flex-col mt-4">
-                <a href="<?= Localization::localizedPath('legal-notice', $currentLocale) ?>" title="<?= htmlspecialchars($labels['legal'], ENT_QUOTES, 'UTF-8') ?>" class="underline underline-offset-2 text-dark-green dark:text-accent-green tracking-1"><?= htmlspecialchars($labels['legal'], ENT_QUOTES, 'UTF-8') ?></a>
+                <a href="<?= Localization::localizedPath('legal-notice', $currentLocale) ?>" class="underline underline-offset-2 text-dark-green dark:text-accent-green"><?= $currentLocale === 'fr' ? 'Mentions légales & confidentialité' : 'Legal notice & privacy' ?></a>
                 <a href="<?= Localization::localizedPath('terms-and-conditions', $currentLocale) ?>" title="<?= htmlspecialchars($labels['terms'], ENT_QUOTES, 'UTF-8') ?>" class="underline underline-offset-2 text-dark-green dark:text-accent-green tracking-1"><?= htmlspecialchars($labels['terms'], ENT_QUOTES, 'UTF-8') ?></a>
                 <span>&copy; Dancuo Lohan - <?php echo date('Y'); ?></span>
             </div>

@@ -4,7 +4,7 @@ $website = '<a href="/fr/home" class="underline underline-offset-2 text-dark-gre
 
 <div class="w-8/12 mx-auto relative pt-16 font-poppins">
     <h1 class="font-bold tracking-2 text-3xl">Conditions générales de <?= $website ?></h1>
-    <p class="mt-2 text-lg">Dernière mise à jour : 9 août 2024</p>
+    <p class="mt-2 text-lg">Dernière mise à jour : 6 octobre 2026</p>
 
     <p class="mt-4">
         Bienvenue sur mon portfolio. En consultant <?= $website ?>, vous acceptez les présentes conditions générales. Si vous ne les acceptez pas, merci de ne pas utiliser ce site.
@@ -39,6 +39,7 @@ $website = '<a href="/fr/home" class="underline underline-offset-2 text-dark-gre
     <p class="mt-4">
         <?= $website ?> utilise uniquement des cookies fonctionnels, notamment pour conserver la préférence de langue et assurer le bon fonctionnement du site. Ces cookies ne sont pas utilisés à des fins publicitaires.
     </p>
+    <p class="mt-4">Une mesure d'audience sans cookies est également effectuée avec Umami. Les informations collectées, leur durée de conservation et le réglage d'opposition sont détaillés dans les <a href="/fr/legal-notice#privacy" class="text-dark-green underline underline-offset-4 dark:text-accent-green">mentions légales et informations de confidentialité</a>.</p>
 
     <h2 class="mt-12 text-xl font-bold tracking-2">7. Droit applicable</h2>
     <p class="mt-4">

@@ -2,7 +2,21 @@
 $caseStudies = [
     [
         'type' => 'Case study',
+        'title' => 'Steambot Chronicles Archive',
+        'period' => '2026',
+        'summary' => 'A website dedicated to Steambot Chronicles, bringing together game information, images, music and documents, with lighter resources for the Web and an interactive 3D builder.',
+        'context' => 'Community archive, performance, SEO, 3D',
+        'image' => '/public/assets/img/case-studies/thumbnails-steambotChronicles.jpg',
+        'alt' => 'Homepage of the Steambot Chronicles Archive website.',
+        'tags' => ['PHP', 'TypeScript', 'WebGL 2', 'SEO'],
+        'links' => [
+            ['label' => 'Read case study', 'href' => '/en/case-studies/steambotChronicles', 'primary' => true],
+        ],
+    ],
+    [
+        'type' => 'Case study',
         'title' => 'CorianderPHP',
+        'period' => 'Since 2024',
         'summary' => 'A personal PHP framework developed mainly as an R&D project. It lets me explore how a framework works internally, test architecture choices, and go deeper into subjects like routing, controllers, views, tests, and release automation.',
         'context' => 'PHP framework, architecture, CLI, tests, and CI/CD',
         'image' => '/public/assets/img/case-studies/thumbnails-corianderPHP.jpg',
@@ -14,19 +28,8 @@ $caseStudies = [
     ],
     [
         'type' => 'Case study',
-        'title' => 'Room Calendars',
-        'summary' => 'An internal application designed to make room availability easier and faster to check. It also helps search for a meeting or a room without manually comparing several calendars in Outlook.',
-        'context' => 'Internal tool, Microsoft Graph API, UX',
-        'image' => '/public/assets/img/case-studies/thumbnails-roomCalendars.jpg',
-        'alt' => 'Thumbnail of the RoomCalendars project, representing a mockup of the application.',
-        'tags' => ['PHP', 'TypeScript', 'Microsoft Graph', 'Mockups'],
-        'links' => [
-            ['label' => 'Read case study', 'href' => '/en/case-studies/roomCalendars', 'primary' => true],
-        ],
-    ],
-    [
-        'type' => 'Case study',
         'title' => 'Sans Suite',
+        'period' => '2026',
         'summary' => 'A local application built to track my job applications, organize the next steps, and find their history without relying on a spreadsheet that had become difficult to read.',
         'context' => 'Local application, SQLite, UX',
         'image' => '/public/assets/img/case-studies/thumbnails-sansSuite.jpg',
@@ -34,6 +37,19 @@ $caseStudies = [
         'tags' => ['PHP', 'SQLite', 'TypeScript', 'CorianderPHP'],
         'links' => [
             ['label' => 'Read case study', 'href' => '/en/case-studies/sansSuite', 'primary' => true],
+        ],
+    ],
+    [
+        'type' => 'Case study',
+        'title' => 'Room Calendars',
+        'period' => '2024',
+        'summary' => 'An internal application designed to make room availability easier and faster to check. It also helps search for a meeting or a room without manually comparing several calendars in Outlook.',
+        'context' => 'Internal tool, Microsoft Graph API, UX',
+        'image' => '/public/assets/img/case-studies/thumbnails-roomCalendars.jpg',
+        'alt' => 'Thumbnail of the RoomCalendars project, representing a mockup of the application.',
+        'tags' => ['PHP', 'TypeScript', 'Microsoft Graph', 'Mockups'],
+        'links' => [
+            ['label' => 'Read case study', 'href' => '/en/case-studies/roomCalendars', 'primary' => true],
         ],
     ],
 ];
@@ -55,153 +71,77 @@ $components = [
     ],
 ];
 ?>
+<div class="mx-auto max-w-6xl px-5 pb-16 pt-9 sm:px-8 sm:pb-20 sm:pt-14 lg:px-10 lg:pt-16">
+    <header class="border-b border-black/15 pb-8 dark:border-white/15 sm:pb-10">
+        <h1 class="font-concert-one text-4xl leading-tight text-black dark:text-white sm:text-6xl">Selected work</h1>
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-black/70 dark:text-white/70 sm:text-lg">A selection of projects I have worked on, with their context, my choices and what I learned.</p>
+    </header>
 
-<div class="relative mx-auto max-w-screen-2xl pb-10 md:pb-16">
-    <section class="mx-auto w-4/5 pt-8 md:pt-16">
-        <div class="border-b border-dark-green/20 pb-8 dark:border-accent-green/25 md:pb-12">
-            <div class="mt-3">
-                <h1 class="font-concert-one text-4xl tracking-1 text-dark-green dark:text-accent-green sm:text-6xl md:text-7xl">
-                    Selected work
-                </h1>
-                <p class="mt-5 max-w-3xl text-base !leading-normal text-black/75 dark:text-white/75 sm:text-xl">
-                    A selection of projects I worked on, with the context, the choices I made, and what I learned from them. The goal is not only to show the final result, but also how I approached each subject.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section class="mx-auto mt-10 w-4/5 md:mt-14">
-        <header class="max-w-3xl">
-            <p class="font-concert-one text-sm uppercase tracking-1 text-dark-green dark:text-accent-green">
-                Work / Case Studies
-            </p>
-            <h2 class="mt-1 font-concert-one text-3xl tracking-1 text-dark-green dark:text-accent-green sm:text-4xl">
-                Complete projects
-            </h2>
-            <p class="mt-3 text-sm !leading-normal text-black/60 dark:text-white/60 sm:text-base">
-                Projects built around a concrete need, with their context, technical and functional choices, and what I learned from them.
-            </p>
-        </header>
-
-        <div class="mt-7 space-y-8">
-            <?php foreach ($caseStudies as $index => $project) { ?>
-                <article data-clickable-card data-card-url="<?= htmlspecialchars($project['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="group/card relative grid cursor-pointer overflow-hidden border-y border-dark-green/25 bg-true-white/70 px-4 pb-4 focus-within:outline focus-within:outline-2 focus-within:outline-offset-[-4px] focus-within:outline-dark-green dark:border-accent-green/25 dark:bg-true-black/45 dark:focus-within:outline-accent-green md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] md:px-0 md:pb-0">
-                        <span class="pointer-events-none absolute inset-y-0 -left-32 -right-32 z-20 hidden translate-x-full bg-gradient-to-l from-dark-green/95 via-dark-green/85 to-transparent opacity-0 transition duration-300 ease-in-out group-hover/card:translate-x-0 group-hover/card:opacity-100 group-focus-within/card:translate-x-0 group-focus-within/card:opacity-100 dark:from-accent-green/95 dark:via-accent-green/80 lg:block" aria-hidden="true"></span>
-
-                        <span class="relative z-10 order-3 mt-4 block aspect-[16/10] w-[84%] justify-self-center overflow-hidden rounded-xl md:order-none md:col-start-1 md:row-start-1 md:mt-0 md:aspect-auto md:min-h-full md:w-auto md:justify-self-stretch md:rounded-none md:border-r md:border-dark-green/15 md:bg-black/5 dark:md:border-accent-green/20 dark:md:bg-white/5">
-                            <?= \CorianderCore\Core\Image\ImageHandler::render($project['image'], [
-                                'alt' => $project['alt'],
-                                'pictureClass' => 'block h-full w-full overflow-hidden rounded-xl md:rounded-none',
-                                'class' => 'h-full w-full rounded-xl object-contain object-center transition duration-300 group-hover/card:opacity-80 md:rounded-none md:p-4',
-                                'quality' => $project['quality'] ?? 80,
-                                'loading' => 'lazy',
-                                'decoding' => 'async',
-                                'draggable' => 'false',
-                            ]) ?>
-                        </span>
-
-                        <span class="contents md:relative md:z-30 md:col-start-2 md:row-start-1 md:grid md:gap-4 md:p-5 lg:grid-cols-[minmax(0,1fr)_10rem] lg:gap-6 lg:p-8">
-                            <span class="contents md:block md:min-w-0">
-                                <span class="order-1 mt-4 flex flex-wrap items-center gap-2 md:mt-0">
-                                    <span class="rounded-md bg-true-white/60 px-2 py-0.5 font-concert-one text-xs uppercase tracking-1 text-dark-green transition duration-300 dark:bg-true-black/60 dark:text-accent-green">
-                                        <?= htmlspecialchars($project['type'], ENT_QUOTES, 'UTF-8') ?>
-                                    </span>
-                                    <span class="h-px w-8 bg-dark-green/30 transition duration-300 dark:bg-accent-green/40 lg:group-hover/card:bg-white/60 lg:group-focus-within/card:bg-white/60 dark:lg:group-hover/card:bg-black/60 dark:lg:group-focus-within/card:bg-black/60" aria-hidden="true"></span>
-                                    <span class="hidden text-xs font-semibold text-black/55 transition duration-300 dark:text-white/55 sm:inline lg:group-hover/card:text-white/75 lg:group-focus-within/card:text-white/75 dark:lg:group-hover/card:text-black/75 dark:lg:group-focus-within/card:text-black/75">
-                                        <?= htmlspecialchars($project['context'], ENT_QUOTES, 'UTF-8') ?>
-                                    </span>
-                                </span>
-
-                                <span class="order-2 mt-2 block font-concert-one text-2xl tracking-1 text-dark-green [text-shadow:1px_0_0_rgb(255_255_255_/_60%),-1px_0_0_rgb(255_255_255_/_60%),0_1px_0_rgb(255_255_255_/_60%),0_-1px_0_rgb(255_255_255_/_60%)] transition duration-300 dark:text-accent-green dark:[text-shadow:1px_0_0_rgb(0_0_0_/_60%),-1px_0_0_rgb(0_0_0_/_60%),0_1px_0_rgb(0_0_0_/_60%),0_-1px_0_rgb(0_0_0_/_60%)] sm:text-3xl md:text-4xl lg:group-hover/card:text-white lg:group-focus-within/card:text-white dark:lg:group-hover/card:text-black dark:lg:group-focus-within/card:text-black">
-                                    <?= htmlspecialchars($project['title'], ENT_QUOTES, 'UTF-8') ?>
-                                </span>
-                                <span class="order-4 mt-4 block max-w-3xl text-sm !leading-normal text-black/75 transition duration-300 dark:text-white/75 sm:text-base md:mt-2 lg:mt-4 lg:group-hover/card:text-white/80 lg:group-focus-within/card:text-white/80 dark:lg:group-hover/card:text-black/80 dark:lg:group-focus-within/card:text-black/80">
-                                    <?= htmlspecialchars($project['summary'], ENT_QUOTES, 'UTF-8') ?>
-                                </span>
-
-                                <a href="<?= htmlspecialchars($project['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="order-5 mt-4 inline-flex w-fit rounded-md bg-dark-green px-3 py-2 text-sm font-semibold text-white transition dark:bg-accent-green dark:text-black lg:hidden">
-                                    <?= htmlspecialchars($project['links'][0]['label'], ENT_QUOTES, 'UTF-8') ?>
-                                </a>
-                            </span>
-
-                            <span class="relative hidden border-l border-dark-green/15 pl-6 transition duration-300 dark:border-accent-green/20 lg:block lg:group-hover/card:border-white/60 lg:group-focus-within/card:border-white/60 dark:lg:group-hover/card:border-black/60 dark:lg:group-focus-within/card:border-black/60">
-                                <span class="block font-concert-one text-5xl text-dark-green/15 transition duration-300 dark:text-accent-green/20 lg:group-hover/card:text-white/25 lg:group-focus-within/card:text-white/25 dark:lg:group-hover/card:text-black/25 dark:lg:group-focus-within/card:text-black/25">
-                                    <?= str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) ?>
-                                </span>
-                                <span class="mt-4 flex flex-col gap-2">
-                                    <?php foreach ($project['tags'] as $tag) { ?>
-                                        <span class="text-sm font-semibold text-black/55 transition duration-300 dark:text-white/55 lg:group-hover/card:text-white/75 lg:group-focus-within/card:text-white/75 dark:lg:group-hover/card:text-black/75 dark:lg:group-focus-within/card:text-black/75">
-                                            <?= htmlspecialchars($tag, ENT_QUOTES, 'UTF-8') ?>
-                                        </span>
-                                    <?php } ?>
-                                </span>
-                                <a href="<?= htmlspecialchars($project['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="mt-6 inline-flex whitespace-nowrap rounded-md bg-dark-green px-3 py-2 text-sm font-semibold text-white transition duration-300 dark:bg-accent-green dark:text-black lg:group-hover/card:bg-mint lg:group-hover/card:text-dark-green lg:group-focus-within/card:bg-mint lg:group-focus-within/card:text-dark-green dark:lg:group-hover/card:bg-black dark:lg:group-hover/card:text-accent-green dark:lg:group-focus-within/card:bg-black dark:lg:group-focus-within/card:text-accent-green">
-                                    <?= htmlspecialchars($project['links'][0]['label'], ENT_QUOTES, 'UTF-8') ?>
-                                </a>
-                            </span>
-                        </span>
+    <section id="case-studies" data-language-scroll-anchor class="pt-8 sm:pt-10" aria-labelledby="case-studies-title">
+        <h2 id="case-studies-title" class="font-concert-one text-3xl text-black dark:text-white sm:text-4xl">Complete projects</h2>
+        <div class="mt-6 space-y-6">
+            <?php foreach ($caseStudies as $project) { ?>
+                <article data-clickable-card data-card-url="<?= htmlspecialchars($project['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="group/card relative grid min-w-0 cursor-pointer gap-4 overflow-hidden rounded-md bg-true-white/70 p-4 focus-within:outline focus-within:outline-2 focus-within:outline-dark-green dark:bg-true-white/5 dark:focus-within:outline-accent-green md:grid-cols-[16rem_minmax(0,1fr)] lg:grid-cols-[20rem_minmax(0,1fr)] md:gap-x-8 md:gap-y-3 md:border md:border-black/15 md:p-6 dark:md:border-white/15">
+                    <span data-card-gradient class="translate-x-full bg-gradient-to-l pointer-events-none absolute inset-y-0 -left-32 -right-32 z-20 hidden from-dark-green/95 via-dark-green/85 to-transparent opacity-0 transition duration-300 ease-in-out group-hover/card:translate-x-0 group-hover/card:opacity-100 group-focus-within/card:translate-x-0 group-focus-within/card:opacity-100 motion-reduce:transition-none dark:from-accent-green/95 dark:via-accent-green/80 lg:block" aria-hidden="true"></span>
+                    <div class="relative z-30 min-w-0 md:col-start-2 md:row-start-1">
+                        <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-black/60 dark:text-white/60">
+                            <span class="rounded-md bg-true-white/60 px-2 py-0.5 font-medium text-dark-green dark:bg-true-black/60 dark:text-accent-green"><?= htmlspecialchars($project['type'], ENT_QUOTES, 'UTF-8') ?></span>
+                            <span class="tabular-nums transition-colors duration-300 motion-reduce:transition-none lg:group-hover/card:text-white lg:group-focus-within/card:text-white dark:lg:group-hover/card:text-black dark:lg:group-focus-within/card:text-black"><?= htmlspecialchars($project['period'], ENT_QUOTES, 'UTF-8') ?></span>
+                        </p>
+                        <h3 class="mt-2 font-concert-one text-2xl leading-tight text-dark-green dark:text-accent-green [text-shadow:1px_0_0_rgb(255_255_255_/_60%),-1px_0_0_rgb(255_255_255_/_60%),0_1px_0_rgb(255_255_255_/_60%),0_-1px_0_rgb(255_255_255_/_60%)] dark:[text-shadow:1px_0_0_rgb(0_0_0_/_60%),-1px_0_0_rgb(0_0_0_/_60%),0_1px_0_rgb(0_0_0_/_60%),0_-1px_0_rgb(0_0_0_/_60%)] transition-colors duration-300 motion-reduce:transition-none lg:group-hover/card:text-white lg:group-focus-within/card:text-white dark:lg:group-hover/card:text-black dark:lg:group-focus-within/card:text-black sm:text-3xl"><?= htmlspecialchars($project['title'], ENT_QUOTES, 'UTF-8') ?></h3>
+                    </div>
+                    <div class="relative z-10 mx-auto w-[84%] max-w-[17.5rem] md:col-start-1 md:row-span-3 md:row-start-1 md:w-full md:max-w-none md:self-center">
+                        <?= \CorianderCore\Core\Image\ImageHandler::render($project['image'], [
+                            'alt' => $project['alt'],
+                            'pictureClass' => 'block overflow-hidden rounded-md',
+                            'class' => 'aspect-[8/5] h-auto w-full rounded-md object-contain',
+                            'quality' => $project['quality'] ?? 80,
+                            'loading' => 'lazy',
+                            'decoding' => 'async',
+                            'draggable' => 'false',
+                        ]) ?>
+                    </div>
+                    <p class="relative z-30 min-w-0 text-sm leading-relaxed text-black/75 dark:text-white/75 transition-colors duration-300 motion-reduce:transition-none lg:group-hover/card:text-white lg:group-focus-within/card:text-white dark:lg:group-hover/card:text-black dark:lg:group-focus-within/card:text-black md:col-start-2 md:row-start-2"><?= htmlspecialchars($project['summary'], ENT_QUOTES, 'UTF-8') ?></p>
+                    <div class="relative z-30 flex min-w-0 flex-wrap items-center justify-between gap-x-5 gap-y-3 md:col-start-2 md:row-start-3">
+                        <p class="min-w-0 text-xs leading-relaxed text-black/55 dark:text-white/60 transition-colors duration-300 motion-reduce:transition-none lg:group-hover/card:text-white lg:group-focus-within/card:text-white dark:lg:group-hover/card:text-black dark:lg:group-focus-within/card:text-black"><?= htmlspecialchars(implode(', ', $project['tags']), ENT_QUOTES, 'UTF-8') ?></p>
+                        <a href="<?= htmlspecialchars($project['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="relative z-30 inline-flex min-h-11 shrink-0 items-center rounded-md bg-dark-green px-4 py-2 text-sm font-semibold text-white hover:bg-dark-green/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 dark:bg-accent-green dark:text-black dark:hover:bg-accent-green/90 transition-colors duration-300 motion-reduce:transition-none lg:group-hover/card:bg-mint lg:group-hover/card:text-dark-green lg:group-focus-within/card:bg-mint lg:group-focus-within/card:text-dark-green dark:lg:group-hover/card:bg-black dark:lg:group-hover/card:text-accent-green dark:lg:group-focus-within/card:bg-black dark:lg:group-focus-within/card:text-accent-green">
+                            <?= htmlspecialchars($project['links'][0]['label'], ENT_QUOTES, 'UTF-8') ?><span class="sr-only"> : <?= htmlspecialchars($project['title'], ENT_QUOTES, 'UTF-8') ?></span>
+                        </a>
+                    </div>
                 </article>
             <?php } ?>
         </div>
     </section>
 
-    <section class="mx-auto mt-12 w-4/5 border-t border-dark-green/20 pt-8 dark:border-accent-green/25 md:mt-16">
-        <header class="max-w-3xl">
-            <p class="font-concert-one text-sm uppercase tracking-1 text-dark-green dark:text-accent-green">
-                Components / Experiments
-            </p>
-            <h2 class="mt-1 font-concert-one text-3xl tracking-1 text-dark-green dark:text-accent-green sm:text-4xl">
-                Components & experiments
-            </h2>
-            <p class="mt-3 text-sm !leading-normal text-black/60 dark:text-white/60 sm:text-base">
-                Shorter projects for testing an idea, an interaction, or a technical approach.
-            </p>
-        </header>
-
-        <div class="mt-7 space-y-5">
+    <section id="components" data-language-scroll-anchor class="mt-12 border-t border-black/15 pt-8 dark:border-white/15 sm:mt-16 sm:pt-10" aria-labelledby="components-title">
+        <h2 id="components-title" class="font-concert-one text-3xl text-black dark:text-white sm:text-4xl">Components & experiments</h2>
+        <p class="mt-3 max-w-2xl text-sm leading-relaxed text-black/65 dark:text-white/65">Shorter projects to test an idea, an interaction or a technical approach.</p>
+        <div class="mt-6 space-y-6">
             <?php foreach ($components as $component) { ?>
-                <article data-clickable-card data-card-url="<?= htmlspecialchars($component['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="group relative block cursor-pointer overflow-hidden border-y border-dark-green/25 bg-true-white/70 transition duration-300 hover:border-dark-green/45 focus-within:outline focus-within:outline-2 focus-within:outline-offset-[-4px] focus-within:outline-dark-green dark:border-accent-green/25 dark:bg-true-black/45 dark:hover:border-accent-green/45 dark:focus-within:outline-accent-green">
-                        <span class="pointer-events-none absolute inset-y-0 -left-32 -right-32 z-20 hidden -translate-x-full bg-gradient-to-r from-dark-green/95 via-dark-green/85 to-transparent opacity-0 transition duration-300 ease-in-out group-hover:translate-x-0 group-hover:opacity-100 group-focus-within:translate-x-0 group-focus-within:opacity-100 dark:from-accent-green/95 dark:via-accent-green/80 lg:block" aria-hidden="true"></span>
-
-                        <span class="grid px-4 pb-4 md:grid-cols-[minmax(0,1fr)_20rem] md:px-0 md:pb-0">
-                            <span class="relative z-10 order-3 mt-4 block aspect-[16/10] w-[84%] justify-self-center overflow-hidden rounded-xl md:order-2 md:mt-0 md:aspect-auto md:min-h-full md:w-auto md:justify-self-stretch md:rounded-none md:border-l md:border-dark-green/15 md:bg-black/5 dark:md:border-accent-green/20 dark:md:bg-white/5">
-                                <?= \CorianderCore\Core\Image\ImageHandler::render($component['image'], [
-                                    'alt' => $component['alt'],
-                                    'pictureClass' => 'block h-full w-full overflow-hidden rounded-xl md:rounded-none',
-                                    'class' => 'h-full w-full rounded-xl object-contain object-center md:rounded-none md:p-4 ' . ($component['imageClass'] ?? ''),
-                                    'quality' => $component['quality'] ?? 80,
-                                    'loading' => 'lazy',
-                                    'decoding' => 'async',
-                                    'draggable' => 'false',
-                                ]) ?>
-                            </span>
-
-                            <span class="contents md:relative md:z-30 md:order-1 md:block md:min-w-0 md:p-5 lg:p-8">
-                                <span class="order-1 mt-4 flex flex-wrap items-center gap-2 md:mt-0">
-                                    <span class="rounded-md bg-true-white/60 px-2 py-0.5 font-concert-one text-xs uppercase tracking-1 text-dark-green transition duration-300 dark:bg-true-black/60 dark:text-accent-green">
-                                        <?= htmlspecialchars($component['type'], ENT_QUOTES, 'UTF-8') ?>
-                                    </span>
-                                    <span class="h-px w-8 bg-dark-green/30 transition duration-300 dark:bg-accent-green/40 lg:group-hover:bg-white/60 lg:group-focus-within:bg-white/60 dark:lg:group-hover:bg-black/60 dark:lg:group-focus-within:bg-black/60" aria-hidden="true"></span>
-                                    <span class="hidden text-xs font-semibold text-black/50 transition duration-300 dark:text-white/50 sm:inline lg:group-hover:text-white/75 lg:group-focus-within:text-white/75 dark:lg:group-hover:text-black/75 dark:lg:group-focus-within:text-black/75">
-                                        <?= htmlspecialchars(implode(', ', $component['tags']), ENT_QUOTES, 'UTF-8') ?>
-                                    </span>
-                                </span>
-
-                                <span class="order-2 mt-2 block font-concert-one text-2xl tracking-1 text-dark-green [text-shadow:1px_0_0_rgb(255_255_255_/_60%),-1px_0_0_rgb(255_255_255_/_60%),0_1px_0_rgb(255_255_255_/_60%),0_-1px_0_rgb(255_255_255_/_60%)] transition duration-300 dark:text-accent-green dark:[text-shadow:1px_0_0_rgb(0_0_0_/_60%),-1px_0_0_rgb(0_0_0_/_60%),0_1px_0_rgb(0_0_0_/_60%),0_-1px_0_rgb(0_0_0_/_60%)] sm:text-3xl md:text-4xl lg:mt-5 lg:group-hover:text-white lg:group-focus-within:text-white dark:lg:group-hover:text-black dark:lg:group-focus-within:text-black">
-                                    <?= htmlspecialchars($component['title'], ENT_QUOTES, 'UTF-8') ?>
-                                </span>
-                                <span class="order-4 mt-4 block max-w-3xl text-sm !leading-normal text-black/75 transition duration-300 dark:text-white/75 sm:text-base lg:mt-3 lg:group-hover:text-white/80 lg:group-focus-within:text-white/80 dark:lg:group-hover:text-black/80 dark:lg:group-focus-within:text-black/80">
-                                    <?= htmlspecialchars($component['summary'], ENT_QUOTES, 'UTF-8') ?>
-                                </span>
-
-                                <span class="order-5 mt-4 flex flex-wrap items-center gap-3 lg:mt-6">
-                                    <a href="<?= htmlspecialchars($component['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="inline-flex whitespace-nowrap rounded-md bg-dark-green px-3 py-2 text-sm font-semibold text-white transition duration-300 dark:bg-accent-green dark:text-black lg:group-hover:bg-mint lg:group-hover:text-dark-green lg:group-focus-within:bg-mint lg:group-focus-within:text-dark-green dark:lg:group-hover:bg-black dark:lg:group-hover:text-accent-green dark:lg:group-focus-within:bg-black dark:lg:group-focus-within:text-accent-green">
-                                        <?= htmlspecialchars($component['links'][0]['label'], ENT_QUOTES, 'UTF-8') ?>
-                                    </a>
-                                </span>
-                            </span>
-
-                        </span>
+                <article data-clickable-card data-card-url="<?= htmlspecialchars($component['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="group/card relative grid min-w-0 cursor-pointer gap-4 overflow-hidden rounded-md bg-true-white/70 p-4 focus-within:outline focus-within:outline-2 focus-within:outline-dark-green dark:bg-true-white/5 dark:focus-within:outline-accent-green md:grid-cols-[16rem_minmax(0,1fr)] lg:grid-cols-[20rem_minmax(0,1fr)] md:gap-x-8 md:gap-y-3 md:border md:border-black/15 md:p-6 dark:md:border-white/15">
+                    <span data-card-gradient class="-translate-x-full bg-gradient-to-r pointer-events-none absolute inset-y-0 -left-32 -right-32 z-20 hidden from-dark-green/95 via-dark-green/85 to-transparent opacity-0 transition duration-300 ease-in-out group-hover/card:translate-x-0 group-hover/card:opacity-100 group-focus-within/card:translate-x-0 group-focus-within/card:opacity-100 motion-reduce:transition-none dark:from-accent-green/95 dark:via-accent-green/80 lg:block" aria-hidden="true"></span>
+                    <div class="relative z-30 min-w-0 md:col-start-2 md:row-start-1">
+                        <p class="flex items-center gap-2 text-xs font-medium text-dark-green dark:text-accent-green">
+                            <span class="rounded-md bg-true-white/60 px-2 py-0.5 dark:bg-true-black/60"><?= htmlspecialchars($component['type'], ENT_QUOTES, 'UTF-8') ?></span>
+                            <span class="h-px w-8 bg-dark-green/30 dark:bg-accent-green/40 lg:group-hover/card:bg-white/60 lg:group-focus-within/card:bg-white/60 dark:lg:group-hover/card:bg-black/60 dark:lg:group-focus-within/card:bg-black/60" aria-hidden="true"></span>
+                        </p>
+                        <h3 class="mt-2 font-concert-one text-2xl leading-tight text-dark-green dark:text-accent-green [text-shadow:1px_0_0_rgb(255_255_255_/_60%),-1px_0_0_rgb(255_255_255_/_60%),0_1px_0_rgb(255_255_255_/_60%),0_-1px_0_rgb(255_255_255_/_60%)] dark:[text-shadow:1px_0_0_rgb(0_0_0_/_60%),-1px_0_0_rgb(0_0_0_/_60%),0_1px_0_rgb(0_0_0_/_60%),0_-1px_0_rgb(0_0_0_/_60%)] transition-colors duration-300 motion-reduce:transition-none lg:group-hover/card:text-white lg:group-focus-within/card:text-white dark:lg:group-hover/card:text-black dark:lg:group-focus-within/card:text-black sm:text-3xl"><?= htmlspecialchars($component['title'], ENT_QUOTES, 'UTF-8') ?></h3>
+                    </div>
+                    <div class="relative z-10 mx-auto w-[84%] max-w-[17.5rem] md:col-start-1 md:row-span-3 md:row-start-1 md:w-full md:max-w-none md:self-center">
+                        <?= \CorianderCore\Core\Image\ImageHandler::render($component['image'], [
+                            'alt' => $component['alt'],
+                            'pictureClass' => 'block overflow-hidden rounded-md',
+                            'class' => 'aspect-[8/5] h-auto w-full rounded-md object-contain ' . ($component['imageClass'] ?? ''),
+                            'quality' => $component['quality'] ?? 80,
+                            'loading' => 'lazy',
+                            'decoding' => 'async',
+                            'draggable' => 'false',
+                        ]) ?>
+                    </div>
+                    <p class="relative z-30 min-w-0 text-sm leading-relaxed text-black/75 dark:text-white/75 transition-colors duration-300 motion-reduce:transition-none lg:group-hover/card:text-white lg:group-focus-within/card:text-white dark:lg:group-hover/card:text-black dark:lg:group-focus-within/card:text-black md:col-start-2 md:row-start-2"><?= htmlspecialchars($component['summary'], ENT_QUOTES, 'UTF-8') ?></p>
+                    <a href="<?= htmlspecialchars($component['links'][0]['href'], ENT_QUOTES, 'UTF-8') ?>" class="relative z-30 inline-flex min-h-11 w-fit items-center rounded-md bg-dark-green px-4 py-2 text-sm font-semibold text-white hover:bg-dark-green/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 dark:bg-accent-green dark:text-black dark:hover:bg-accent-green/90 transition-colors duration-300 motion-reduce:transition-none lg:group-hover/card:bg-mint lg:group-hover/card:text-dark-green lg:group-focus-within/card:bg-mint lg:group-focus-within/card:text-dark-green dark:lg:group-hover/card:bg-black dark:lg:group-hover/card:text-accent-green dark:lg:group-focus-within/card:bg-black dark:lg:group-focus-within/card:text-accent-green md:col-start-2 md:row-start-3">
+                        <?= htmlspecialchars($component['links'][0]['label'], ENT_QUOTES, 'UTF-8') ?>
+                    </a>
                 </article>
             <?php } ?>
         </div>

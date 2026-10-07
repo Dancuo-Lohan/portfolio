@@ -15,7 +15,7 @@ export default {
         'concert-one': ['"ConcertOne"', 'sans-serif'],
       },
       colors: {
-        'black': '#111827',
+        'black': '#171B19',
         'true-black': '#000000',
         'mint': '#F6FAF7',
         'accent-green': '#8FE3B4',
@@ -25,16 +25,16 @@ export default {
       },
       boxShadow: {
         'white': 'inset 0px 0px 30px 35px #F6FAF7',
-        'black': 'inset 0px 0px 30px 35px #111827',
+        'black': 'inset 0px 0px 30px 35px #171B19',
         'outer-white': '0px 0px 30px 35px #F6FAF7',
-        'outer-black': '0px 0px 30px 35px #111827',
+        'outer-black': '0px 0px 30px 35px #171B19',
       },
       dropShadow: {
         'day': '0 0 5px #101d28',
         'night': '0 0 5px #171a28',
         'rise': '0 0 5px #20191e',
         'white': '0 0 3px #F6FAF7',
-        'black': '0 0 3px #111827',
+        'black': '0 0 3px #171B19',
         'outline': [
           '-1px -1px 0 rgba(0,0,0, 0.5)',
           '1px -1px 0 rgba(0,0,0, 0.5)',

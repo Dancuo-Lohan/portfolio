@@ -99,4 +99,36 @@
     <priority>0.70</priority>
   </url>
 
+  <url>
+    <loc>https://lohan.dancuo.fr/en/case-studies/steambotChronicles</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/case-studies/steambotChronicles" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/case-studies/steambotChronicles" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lohan.dancuo.fr/en/case-studies/steambotChronicles" />
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://lohan.dancuo.fr/fr/case-studies/steambotChronicles</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/case-studies/steambotChronicles" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/case-studies/steambotChronicles" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lohan.dancuo.fr/en/case-studies/steambotChronicles" />
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://lohan.dancuo.fr/en/case-studies/sansSuite</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/case-studies/sansSuite" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/case-studies/sansSuite" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lohan.dancuo.fr/en/case-studies/sansSuite" />
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://lohan.dancuo.fr/fr/case-studies/sansSuite</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lohan.dancuo.fr/en/case-studies/sansSuite" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://lohan.dancuo.fr/fr/case-studies/sansSuite" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lohan.dancuo.fr/en/case-studies/sansSuite" />
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.80</priority>
+  </url>
 </urlset>

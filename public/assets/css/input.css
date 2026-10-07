@@ -5,7 +5,7 @@
 @source "../../../nodejs/src/**/*.ts";
 
 :root {
-    --black: 17, 24, 39;
+    --black: 23, 27, 25;
     --true-black: 0, 0, 0;
     --accent-green: 143, 227, 180;
     --mint: 246, 250, 247;
@@ -26,10 +26,6 @@
     src:
         url("../fonts/ConcertOne.woff2") format("woff2"),
         url("../fonts/ConcertOne.ttf") format("ttf");
-}
-
-html {
-    scroll-behavior: smooth;
 }
 
 *:focus {
@@ -179,7 +175,7 @@ html {
 
     .workflow-description {
         margin-top: 0.25rem;
-        color: rgba(17, 24, 39, 0.72);
+        color: rgba(var(--black), 0.72);
         font-size: 0.925rem;
         line-height: 1.65;
     }
@@ -194,7 +190,7 @@ html {
 
     .dark .workflow-marker {
         border-color: rgba(143, 227, 180, 0.34);
-        background: #111827;
+        background: rgb(var(--black));
         color: #8fe3b4;
     }
 

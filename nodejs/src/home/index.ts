@@ -1,26 +1,25 @@
-import { HorizontalScrollManager } from "../Utils/Animations/HorizontalScrollManager/HorizontalScrollManager";
-import { ScaleOnScrollManager } from "../Utils/Animations/ScaleOnScrollManager/ScaleOnScrollManager";
 import { Responsive } from "../Utils/Responsive/Responsive";
 import { ThemeHandler } from "../Utils/ThemeHandler/ThemeHandler";
 import { LanguageScrollHandler } from "../Utils/LanguageScrollHandler/LanguageScrollHandler";
+import { ClickableCards } from "../Utils/ClickableCards/ClickableCards";
 
 document.addEventListener("DOMContentLoaded", () => {
 	new Responsive();
 	new LanguageScrollHandler();
-	new HorizontalScrollManager("horizontal-scroll-main-container", "horizontal-scroll-sticky-container", "horizontal-scroll");
-	new ScaleOnScrollManager("scale-on-scroll");
+	new ClickableCards();
 	ThemeHandler.getInstance("changeTheme");
 
-	const animatedElements = document.querySelectorAll(
-		".animated-right, .animated-left, .animated-right p, .animated-left p"
-	) as NodeListOf<HTMLElement>;
-
-	setTimeout(() => {
-		animatedElements.forEach((el) => {
-			// Force reflow
-			el.classList.remove("animation-start");
-			void el.offsetWidth;
-			el.classList.add("animation-start");
+	const carbonBadge = document.getElementById("wcb");
+	if (carbonBadge) {
+		const updateBadgeVisibility = () => {
+			const result = carbonBadge.querySelector("#wcb_g")?.textContent?.trim() ?? "";
+			carbonBadge.hidden = !/^\d+(?:\.\d+)?g of CO2\/view$/.test(result);
+		};
+		new MutationObserver(updateBadgeVisibility).observe(carbonBadge, {
+			childList: true,
+			characterData: true,
+			subtree: true,
 		});
-	}, 10);
+		updateBadgeVisibility();
+	}
 });
