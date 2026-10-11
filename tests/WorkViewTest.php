@@ -16,7 +16,7 @@ final class WorkViewTest extends TestCase
         foreach (['fr', 'en'] as $locale) {
             ob_start();
             try {
-                require PROJECT_ROOT . '/src/Views/' . $locale . '/my-work/index.php';
+                require PROJECT_ROOT . '/src/Views/' . $locale . '/my-work/index.get.php';
                 $html = (string) ob_get_contents();
             } finally {
                 ob_end_clean();
@@ -39,6 +39,9 @@ final class WorkViewTest extends TestCase
                 self::assertSame(0, $xpath->query('.//a//h3', $card)->length);
             }
             foreach ($xpath->query('//article') as $card) {
+                $titleClasses = $xpath->query('.//h3', $card)->item(0)->getAttribute('class');
+                self::assertStringNotContainsString('group-hover/card:text-', $titleClasses);
+                self::assertStringNotContainsString('group-focus-within/card:text-', $titleClasses);
                 $gradients = $xpath->query('.//*[@data-card-gradient]', $card);
                 self::assertSame(1, $gradients->length);
                 $gradient = $gradients->item(0);

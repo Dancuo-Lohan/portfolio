@@ -2,7 +2,8 @@
 declare(strict_types=1);
 
 use App\Modules\Localization\Localization;
-use App\Support\Page;
+use CorianderCore\Core\Router\Router;
+use Nyholm\Psr7\ServerRequest;
 use PHPUnit\Framework\TestCase;
 
 final class LocalizedViewsTest extends TestCase
@@ -20,8 +21,8 @@ final class LocalizedViewsTest extends TestCase
 
             foreach ($viewsByLocale[$locale] as $view) {
                 self::assertFileExists(
-                    $localeRoot . '/' . $view . '/metadata.php',
-                    sprintf('Missing metadata.php for %s/%s.', $locale, $view)
+                    $localeRoot . '/' . $view . '/_metadata.php',
+                    sprintf('Missing _metadata.php for %s/%s.', $locale, $view)
                 );
             }
         }
@@ -33,9 +34,9 @@ final class LocalizedViewsTest extends TestCase
         self::assertSame([], array_values(array_diff($frenchViews, $englishViews)), 'Missing English translated views.');
     }
 
-    public function testOnlySharedLayoutAndLocaleRootsLiveAtViewsRoot(): void
+    public function testRootContainsOnlyLayoutsScriptsMiddlewareAndPublicHandlers(): void
     {
-        $allowed = ['_footer.php', '_header.php', 'en', 'fr'];
+        $allowed = ['_footer.php', '_header.php', '_middleware.php', '_script.ts', 'case-studies', 'components', 'contact-me.get.php', 'en', 'fr', 'home.get.php', 'index.get.php', 'legal-notice.get.php', 'my-work.get.php', 'page-not-found.get.php', 'sitemap.xml.get.php', 'terms-and-conditions.get.php'];
         $entries = array_values(array_diff(scandir(PROJECT_ROOT . '/src/Views') ?: [], ['.', '..']));
         sort($entries);
 
@@ -63,7 +64,7 @@ final class LocalizedViewsTest extends TestCase
             foreach (Localization::supportedLocales() as $locale) {
                 $root = PROJECT_ROOT . '/src/Views/' . $locale;
                 $path = '/' . $locale . '/case-studies/' . $study;
-                $source = file_get_contents($root . '/case-studies/' . $study . '/index.php');
+                $source = file_get_contents($root . '/case-studies/' . $study . '/index.get.php');
                 self::assertNotFalse($source);
 
                 $document = new DOMDocument();
@@ -76,14 +77,14 @@ final class LocalizedViewsTest extends TestCase
                 self::assertNotEmpty($anchorsByLocale[$locale]);
 
                 foreach (['home', 'my-work'] as $view) {
-                    self::assertStringContainsString($path, (string) file_get_contents($root . '/' . $view . '/index.php'));
+                    self::assertStringContainsString($path, (string) file_get_contents($root . '/' . $view . '/index.get.php'));
                 }
                 self::assertStringContainsString(
                     'href="https://lohan.dancuo.fr' . $path . '"',
-                    (string) Page::response($locale . '/case-studies/' . $study)->getBody()
+                    (string) (new Router())->handle(new ServerRequest('GET', '/' . $locale . '/case-studies/' . $study))->getBody()
                 );
                 self::assertCount(1, $sitemap->xpath('//s:url[s:loc="https://lohan.dancuo.fr' . $path . '"]'));
-                self::assertFileExists(PROJECT_ROOT . '/public/assets/js/case-studies/' . $study . '/index.js');
+                self::assertFileExists(PROJECT_ROOT . '/public/assets/js/pages/_script.js');
             }
 
             self::assertSame($anchorsByLocale['fr'], $anchorsByLocale['en']);
@@ -99,7 +100,7 @@ final class LocalizedViewsTest extends TestCase
             foreach (Localization::supportedLocales() as $locale) {
                 $pageUrl = 'https://lohan.dancuo.fr/' . $locale . '/case-studies/' . $study;
                 self::assertCount(1, $sitemap->xpath('//s:url[s:loc="' . $pageUrl . '"]'));
-                $metadata = (string) Page::response($locale . '/case-studies/' . $study)->getBody();
+                $metadata = (string) (new Router())->handle(new ServerRequest('GET', '/' . $locale . '/case-studies/' . $study))->getBody();
                 $document = new DOMDocument();
                 self::assertTrue($document->loadHTML('<meta charset="utf-8">' . $metadata, LIBXML_NOERROR | LIBXML_NOWARNING));
                 $xpath = new DOMXPath($document);
@@ -120,9 +121,9 @@ final class LocalizedViewsTest extends TestCase
         self::assertStringNotContainsString('estrilion', (string) file_get_contents(PROJECT_ROOT . '/public/sitemap.xml'));
         foreach (Localization::supportedLocales() as $locale) {
             $root = PROJECT_ROOT . '/src/Views/' . $locale;
-            self::assertFileDoesNotExist($root . '/case-studies/estrilion/index.php');
+            self::assertFileDoesNotExist($root . '/case-studies/estrilion/index.get.php');
             foreach (['home', 'my-work'] as $view) {
-                $source = (string) file_get_contents($root . '/' . $view . '/index.php');
+                $source = (string) file_get_contents($root . '/' . $view . '/index.get.php');
                 self::assertStringNotContainsString('estrilion', strtolower($source));
                 self::assertStringContainsString('thumbnails-steambotChronicles.jpg', $source);
             }
@@ -137,7 +138,7 @@ final class LocalizedViewsTest extends TestCase
         ];
 
         foreach ($labelsByLocale as $locale => $labels) {
-            $source = file_get_contents(PROJECT_ROOT . '/src/Views/' . $locale . '/case-studies/steambotChronicles/index.php');
+            $source = file_get_contents(PROJECT_ROOT . '/src/Views/' . $locale . '/case-studies/steambotChronicles/index.get.php');
             self::assertNotFalse($source);
             $document = new DOMDocument();
             self::assertTrue($document->loadHTML('<meta charset="utf-8">' . $source, LIBXML_NOERROR | LIBXML_NOWARNING));
@@ -161,7 +162,7 @@ final class LocalizedViewsTest extends TestCase
     public function testSteambotCopyKeepsSoloAuthorshipAndExplainsLightingMeasurement(): void
     {
         foreach (['fr', 'en'] as $locale) {
-            $source = (string) file_get_contents(PROJECT_ROOT . '/src/Views/' . $locale . '/case-studies/steambotChronicles/index.php');
+            $source = (string) file_get_contents(PROJECT_ROOT . '/src/Views/' . $locale . '/case-studies/steambotChronicles/index.get.php');
             self::assertDoesNotMatchRegularExpression('/\b(nous|we)\b/iu', $source);
             $document = new DOMDocument();
             self::assertTrue($document->loadHTML('<meta charset="utf-8">' . $source, LIBXML_NOERROR | LIBXML_NOWARNING));
@@ -182,7 +183,7 @@ final class LocalizedViewsTest extends TestCase
         foreach (['fr', 'en'] as $locale) {
             $documents = [];
             foreach (['corianderPHP', 'steambotChronicles'] as $study) {
-                $source = (string) file_get_contents(PROJECT_ROOT . '/src/Views/' . $locale . '/case-studies/' . $study . '/index.php');
+                $source = (string) file_get_contents(PROJECT_ROOT . '/src/Views/' . $locale . '/case-studies/' . $study . '/index.get.php');
                 $document = new DOMDocument();
                 self::assertTrue($document->loadHTML('<meta charset="utf-8">' . $source, LIBXML_NOERROR | LIBXML_NOWARNING));
                 $documents[$study] = new DOMXPath($document);
@@ -211,7 +212,7 @@ final class LocalizedViewsTest extends TestCase
         );
 
         foreach ($iterator as $file) {
-            if (!$file instanceof SplFileInfo || $file->getFilename() !== 'index.php') {
+            if (!$file instanceof SplFileInfo || $file->getFilename() !== 'index.get.php' || $file->getPath() === $localeRoot) {
                 continue;
             }
 

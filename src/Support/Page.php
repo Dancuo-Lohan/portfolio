@@ -9,13 +9,6 @@ use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 
 final class Page
 {
-    public static function response(string $view, int $status = 200): ResponseInterface
-    {
-        // View names come from the application's route files, never the request.
-        $metadata = require PROJECT_ROOT . '/src/Views/' . $view . '/metadata.php';
-        return Responses::view($view . '/index', ['viewPath' => $view, 'page' => $metadata], $status);
-    }
-
     public static function redirect(ServerRequestInterface $request, string $view): ResponseInterface
     {
         $locale = Localization::preferredLocale(

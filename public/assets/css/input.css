@@ -2,16 +2,32 @@
 @config "../../../nodejs/tailwind.config.js";
 @source "../../**/*.php";
 @source "../../../src/**/*.php";
-@source "../../../nodejs/src/**/*.ts";
+@source "../../../src/Views/**/*.ts";
+@source "../../../src/Scripts/**/*.ts";
 
 :root {
-    --black: 23, 27, 25;
-    --true-black: 0, 0, 0;
-    --accent-green: 143, 227, 180;
-    --mint: 246, 250, 247;
-    --white: 246, 250, 247;
-    --dark-green: 15, 107, 79;
+    --black: 41, 40, 32;
+    --true-black: 31, 30, 25;
+    --accent-green: 250, 249, 244;
+    --mint: 250, 249, 244;
+    --white: 250, 249, 244;
+    --dark-green: 41, 40, 32;
     --duration: 15s;
+    color-scheme: light;
+}
+
+.dark {
+    color-scheme: dark;
+}
+
+::selection {
+    background: rgb(var(--black));
+    color: rgb(var(--white));
+}
+
+.dark ::selection {
+    background: rgb(var(--white));
+    color: rgb(var(--black));
 }
 
 @font-face {
@@ -47,7 +63,7 @@
 }
 
 .scrollbar::-webkit-scrollbar {
-    width: 20px;
+    width: 12px;
 }
 
 .scrollbar-code::-webkit-scrollbar {
@@ -62,12 +78,10 @@
 
 .scrollbar::-webkit-scrollbar-track {
     background: rgb(var(--white));
-    outline: 2px solid rgb(var(--dark-green));
 }
 
 .dark .scrollbar::-webkit-scrollbar-track {
     background: rgb(var(--black));
-    outline: 2px solid rgb(var(--accent-green));
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
@@ -140,11 +154,11 @@
         bottom: 0;
         width: 2px;
         border-radius: 999px;
-        background: rgba(15, 107, 79, 0.18);
+        background: rgba(var(--black), 0.18);
     }
 
     .workflow-step:not(:last-child) .workflow-content {
-        border-bottom: 1px solid rgba(15, 107, 79, 0.12);
+        border-bottom: 1px solid rgba(var(--black), 0.12);
     }
 
     .workflow-marker {
@@ -153,10 +167,10 @@
         width: 2.25rem;
         height: 2.25rem;
         place-items: center;
-        border: 1px solid rgba(15, 107, 79, 0.24);
+        border: 1px solid rgba(var(--black), 0.24);
         border-radius: 999px;
-        background: #f6faf7;
-        color: #0f6b4f;
+        background: rgb(var(--white));
+        color: rgb(var(--black));
         font-size: 0.875rem;
         font-weight: 700;
         line-height: 1;
@@ -170,7 +184,7 @@
 
     .workflow-title {
         font-weight: 700;
-        color: #0f6b4f;
+        color: rgb(var(--black));
     }
 
     .workflow-description {
@@ -181,25 +195,25 @@
     }
 
     .dark .workflow-step::before {
-        background: rgba(143, 227, 180, 0.24);
+        background: rgba(var(--white), 0.24);
     }
 
     .dark .workflow-step:not(:last-child) .workflow-content {
-        border-bottom-color: rgba(143, 227, 180, 0.16);
+        border-bottom-color: rgba(var(--white), 0.16);
     }
 
     .dark .workflow-marker {
-        border-color: rgba(143, 227, 180, 0.34);
+        border-color: rgba(var(--white), 0.34);
         background: rgb(var(--black));
-        color: #8fe3b4;
+        color: rgb(var(--white));
     }
 
     .dark .workflow-title {
-        color: #8fe3b4;
+        color: rgb(var(--white));
     }
 
     .dark .workflow-description {
-        color: rgba(255, 255, 255, 0.72);
+        color: rgba(var(--white), 0.72);
     }
 }
 
@@ -249,58 +263,6 @@
 
 .dark .text-stroke {
     -webkit-text-stroke: var(--webkit-stroke) rgba(var(--accent-green), 0.25);
-}
-
-.border-opacity-20 {
-    --portfolio-border-opacity: 0.2;
-}
-
-.border-opacity-40 {
-    --portfolio-border-opacity: 0.4;
-}
-
-.border-dark-green {
-    border-color: rgba(var(--dark-green), var(--portfolio-border-opacity, 1));
-}
-
-.dark .dark\:border-accent-green {
-    border-color: rgba(var(--accent-green), var(--portfolio-border-opacity, 1));
-}
-
-.dark .dark\:border-opacity-20 {
-    --portfolio-border-opacity: 0.2;
-}
-
-.dark .dark\:border-opacity-40 {
-    --portfolio-border-opacity: 0.4;
-}
-
-.text-opacity-10 {
-    --portfolio-text-opacity: 0.1;
-}
-
-.\!text-opacity-15 {
-    --portfolio-text-opacity: 0.15 !important;
-}
-
-.text-dark-green {
-    color: rgba(var(--dark-green), var(--portfolio-text-opacity, 1));
-}
-
-.dark .dark\:text-accent-green {
-    color: rgba(var(--accent-green), var(--portfolio-text-opacity, 1));
-}
-
-.bg-opacity-80 {
-    --portfolio-bg-opacity: 0.8;
-}
-
-.bg-white {
-    background-color: rgba(var(--white), var(--portfolio-bg-opacity, 1));
-}
-
-.dark .dark\:bg-black {
-    background-color: rgba(var(--black), var(--portfolio-bg-opacity, 1));
 }
 
 @media (max-height: 668px) and (min-width: 640px) {

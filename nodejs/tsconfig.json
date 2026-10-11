@@ -3,6 +3,7 @@
         "target": "ES2020",
         "useDefineForClassFields": true,
         "module": "ESNext",
+        "moduleDetection": "force",
         "lib": [
             "ES2020",
             "DOM",
@@ -14,20 +15,16 @@
         "allowImportingTsExtensions": false,
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "noEmit": false,
-        "outDir": "../public/assets/js/", // Directory for compiled JS files
-        "rootDir": "./src", // Directory for TS files
+        "noEmit": true,
         /* Linting */
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
+    "exclude": ["../src/Scripts/Utils/DEPRECATED - ThemeChanger/**", "../src/Scripts/Utils/ParisClock/**"],
     "include": [
-        "src"
-    ],
-    "exclude": [
-        "src/Utils/DEPRECATED - ThemeChanger/**",
-        "src/Utils/ParisClock/**"
+        "../src/Views",
+        "../src/Scripts"
     ]
 }

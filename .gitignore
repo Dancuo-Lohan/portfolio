@@ -8,4 +8,5 @@ composer.phar
 /cache/routes.php.lock
 /cache/routes.php.*.tmp
 /CorianderCore/Tests/_tmp*
+/public/assets/js/pages/.generated.json
 /old_portfolio/

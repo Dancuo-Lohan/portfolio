@@ -1,13 +1,11 @@
 <?php
 
-use CorianderCore\Core\Support\PublicUrl;
 use App\Modules\Localization\Localization;
 
-$requestedView = $viewPath ?? 'en/home';
+$requestedView = $metadata['viewPath'] ?? 'en/home';
 $currentLocale = Localization::localeFromViewPath($requestedView) ?? Localization::DEFAULT_LOCALE;
 $currentView = Localization::stripLocale($requestedView);
 $labels = Localization::labels($currentLocale);
-$scriptPath = 'assets/js/' . $currentView . '/index.js';
 ?>
 </main>
 <footer id="footer" class="w-full absolute bottom-0 h-auto border-t-2 border-dark-green dark:border-accent-green bg-white dark:bg-black">
@@ -23,9 +21,6 @@ $scriptPath = 'assets/js/' . $currentView . '/index.js';
     </div>
 </footer>
 
-<?php if (file_exists(PROJECT_ROOT . '/public/' . $scriptPath)) { ?>
-    <script type="module" src="<?= PublicUrl::versionedAsset($scriptPath) ?>" defer></script>
-<?php } ?>
 <script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
 </body>
 

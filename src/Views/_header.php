@@ -3,7 +3,7 @@
 use CorianderCore\Core\Support\PublicUrl;
 use App\Modules\Localization\Localization;
 
-$requestedView = $viewPath ?? 'en/home';
+$requestedView = $metadata['viewPath'] ?? 'en/home';
 $currentLocale = Localization::localeFromViewPath($requestedView) ?? Localization::DEFAULT_LOCALE;
 $currentView = Localization::stripLocale($requestedView);
 $activeMenu = isset($menu) ? (string) $menu : Localization::activeMenu($requestedView);
@@ -35,11 +35,11 @@ if (!headers_sent()) {
     <link rel="icon" type="image/x-icon" href="<?= PublicUrl::versionedAsset('assets/img/favicon.png') ?>">
 
     <?php // Page metadata is already escaped by the framework's view renderer. ?>
-    <title><?= $page['title'] ?? 'Lohan Dancuo' ?></title>
-    <?php foreach ($page['links'] ?? [] as $attributes) { ?>
+    <title><?= $metadata['title'] ?? 'Lohan Dancuo' ?></title>
+    <?php foreach ($metadata['links'] ?? [] as $attributes) { ?>
         <link<?php foreach ($attributes as $name => $value) { ?> <?= $name ?>="<?= $value ?>"<?php } ?>>
     <?php } ?>
-    <?php foreach ($page['meta'] ?? [] as $attributes) { ?>
+    <?php foreach ($metadata['meta'] ?? [] as $attributes) { ?>
         <meta<?php foreach ($attributes as $name => $value) { ?> <?= $name ?>="<?= $value ?>"<?php } ?>>
     <?php } ?>
     <link rel="stylesheet" href="<?= PublicUrl::versionedAsset('assets/css/output.css') ?>">

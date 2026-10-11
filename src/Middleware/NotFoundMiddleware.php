@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Middleware;
 
 use App\Modules\Localization\Localization;
-use App\Support\Page;
+use CorianderCore\Core\Http\Responses;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
 use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 
@@ -23,6 +23,11 @@ final class NotFoundMiddleware implements MiddlewareInterface
                 $request->getCookieParams()['portfolio_locale'] ?? null
             );
 
-        return Page::response($locale . '/page-not-found', 404);
+        $page = Responses::view($locale . '/page-not-found/_notfound', status: 404);
+        $response = $response->withBody($page->getBody())->withHeader('Content-Type', $page->getHeaderLine('Content-Type'));
+        foreach (['Content-Length', 'Transfer-Encoding', 'Content-Encoding', 'Content-Range', 'ETag', 'Last-Modified'] as $header) {
+            $response = $response->withoutHeader($header);
+        }
+        return $response;
     }
 }

@@ -43,7 +43,7 @@ final class PrivacyNoticeTest extends TestCase
     {
         ob_start();
         try {
-            require PROJECT_ROOT . '/src/Views/' . $view . '/index.php';
+            require PROJECT_ROOT . '/src/Views/' . $view . '/index.get.php';
             return (string) ob_get_contents();
         } finally {
             ob_end_clean();

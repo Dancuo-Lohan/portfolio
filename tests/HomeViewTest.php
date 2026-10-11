@@ -89,20 +89,21 @@ final class HomeViewTest extends TestCase
 
     public function testSkillsKeepVisibleNamesAlongsideTheirLogosWithoutDisclosure(): void
     {
-        $titles = [
-            'fr' => ['Autres technologies utilisées'],
-            'en' => ["Other technologies I've used"],
-        ];
-        foreach ($titles as $locale => $expected) {
+        $namesByLocale = [];
+        $addedTechnologies = ['Node.js', 'React', 'Next.js', 'Electron', 'Three.js', 'Python', 'Django', 'Java', 'Godot', 'Skript', 'Laserfiche'];
+        foreach (['fr', 'en'] as $locale) {
             $xpath = $this->renderHome($locale);
-            $headings = $xpath->query('//*[@id="skills"]//h3');
-            self::assertSame(1, $headings->length);
-            foreach ($headings as $index => $heading) {
-                self::assertSame($expected[$index], trim($heading->textContent));
-                $paragraph = $xpath->query('./following-sibling::p', $heading)->item(0);
-                self::assertNotNull($paragraph);
-                self::assertLessThanOrEqual(50, count(preg_split('/\s+/u', trim($paragraph->textContent))));
+            self::assertSame(0, $xpath->query('//*[@id="other-technologies"]')->length);
+            foreach ($xpath->query('//*[@id="skills"]//li') as $technology) {
+                $name = trim($technology->textContent);
+                $namesByLocale[$locale][] = $name;
+                self::assertSame(1, $xpath->query('.//img', $technology)->length, $name . ' must have an icon.');
             }
+            foreach ($addedTechnologies as $name) {
+                self::assertSame(1, count(array_keys($namesByLocale[$locale], $name, true)), $name . ' must appear once.');
+            }
+            self::assertNotContains('Bun', $namesByLocale[$locale]);
+            self::assertNotContains('C#', $namesByLocale[$locale]);
             self::assertSame(0, $xpath->query('//*[@id="skills"]//a[@href="/' . $locale . '/case-studies/steambotChronicles"]')->length);
             self::assertSame(0, $xpath->query('//*[@id="projects"]//a[@href="/' . $locale . '/my-work"]')->length);
             self::assertSame(0, $xpath->query('//*[@id="skills"]//details')->length);
@@ -113,12 +114,9 @@ final class HomeViewTest extends TestCase
                 self::assertSame('', $logo->getAttribute('alt'));
                 self::assertNotEmpty(trim($xpath->query('./ancestor::li[1]', $logo)->item(0)->textContent));
             }
-            self::assertSame(4, $xpath->query('//*[@id="skills"]//dl/dt | //*[@id="skills"]//dl/div/dt')->length);
-            $other = $xpath->query('//*[@id="other-technologies"]')->item(0);
-            self::assertStringContainsString('Java', $other->textContent);
-            self::assertStringContainsString('Python', $other->textContent);
-            self::assertStringContainsString('Minecraft', $other->textContent);
+            self::assertSame(5, $xpath->query('//*[@id="skills"]//dl/div/dt')->length);
         }
+        self::assertSame($namesByLocale['fr'], $namesByLocale['en']);
     }
 
     public function testLyrecoExperienceIncludesFormBasedLowCodeAutomation(): void
@@ -142,7 +140,7 @@ final class HomeViewTest extends TestCase
     {
         foreach (['fr', 'en'] as $locale) {
             foreach (['home', 'contact-me'] as $view) {
-                $viewPath = $locale . '/' . $view;
+                $metadata = ['viewPath' => $locale . '/' . $view];
                 ob_start();
                 try {
                     require PROJECT_ROOT . '/src/Views/_footer.php';
@@ -162,7 +160,7 @@ final class HomeViewTest extends TestCase
     {
         ob_start();
         try {
-            require PROJECT_ROOT . '/src/Views/' . $currentLocale . '/home/index.php';
+            require PROJECT_ROOT . '/src/Views/' . $currentLocale . '/home/index.get.php';
             $html = (string) ob_get_contents();
         } finally {
             ob_end_clean();
