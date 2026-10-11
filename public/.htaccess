@@ -1,0 +1,12 @@
+RewriteEngine On
+Options -Indexes
+DirectoryIndex index.php
+
+RewriteRule (^|/)\. - [F,L]
+RewriteRule \.(?:bak(?:\.\d+)?|log|sqlite(?:3)?|db)$ - [F,L,NC]
+RewriteRule ^(?:public_views(?:/|$)|routes\.php$) - [F,L,NC]
+RewriteRule ^(?!index\.php$).*\.php(?:/|$) - [F,L,NC]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]

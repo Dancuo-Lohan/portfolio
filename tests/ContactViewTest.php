@@ -14,7 +14,7 @@ final class ContactViewTest extends TestCase
         foreach (['fr', 'en'] as $locale) {
             ob_start();
             try {
-                require PROJECT_ROOT . '/public/public_views/' . $locale . '/contact-me/index.php';
+                require PROJECT_ROOT . '/src/Views/' . $locale . '/contact-me/index.php';
                 $html = (string) ob_get_contents();
             } finally {
                 ob_end_clean();

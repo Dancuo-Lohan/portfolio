@@ -1,5 +1,16 @@
 RewriteEngine On
 
+# Keep framework and application source private, including root deployments.
+RewriteRule (^|/)\. - [F,L]
+RewriteRule ^(?:CorianderCore|src|config|vendor|nodejs|database|backups|cache|logs|tests|docs|old_portfolio)(?:/|$) - [F,L,NC]
+RewriteRule \.(?:bak(?:\.\d+)?|log|sqlite(?:3)?|db)$ - [F,L,NC]
+RewriteRule ^(?:coriander|composer\.(?:json|lock|phar)|phpunit\.xml|AGENTS\.md|README\.md)$ - [F,L,NC]
+RewriteRule ^public/(?:public_views(?:/|$)|routes\.php$) - [F,L,NC]
+
+# Only the front controller may execute PHP through HTTP.
+RewriteCond %{REQUEST_URI} !^/public/index\.php$
+RewriteRule \.php(?:/|$) - [F,L,NC]
+
 # Ensure the default directory index is public/index.php
 DirectoryIndex public/index.php
 

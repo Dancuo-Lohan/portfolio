@@ -16,7 +16,7 @@ final class WorkViewTest extends TestCase
         foreach (['fr', 'en'] as $locale) {
             ob_start();
             try {
-                require PROJECT_ROOT . '/public/public_views/' . $locale . '/my-work/index.php';
+                require PROJECT_ROOT . '/src/Views/' . $locale . '/my-work/index.php';
                 $html = (string) ob_get_contents();
             } finally {
                 ob_end_clean();

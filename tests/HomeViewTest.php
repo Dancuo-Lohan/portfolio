@@ -142,10 +142,10 @@ final class HomeViewTest extends TestCase
     {
         foreach (['fr', 'en'] as $locale) {
             foreach (['home', 'contact-me'] as $view) {
-                $__corianderRequestedView = $locale . '/' . $view;
+                $viewPath = $locale . '/' . $view;
                 ob_start();
                 try {
-                    require PROJECT_ROOT . '/public/public_views/footer.php';
+                    require PROJECT_ROOT . '/src/Views/_footer.php';
                     $html = (string) ob_get_contents();
                 } finally {
                     ob_end_clean();
@@ -162,7 +162,7 @@ final class HomeViewTest extends TestCase
     {
         ob_start();
         try {
-            require PROJECT_ROOT . '/public/public_views/' . $currentLocale . '/home/index.php';
+            require PROJECT_ROOT . '/src/Views/' . $currentLocale . '/home/index.php';
             $html = (string) ob_get_contents();
         } finally {
             ob_end_clean();

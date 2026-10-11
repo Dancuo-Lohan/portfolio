@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Modules\Localization;
+namespace App\Modules\Localization;
 
 final class Localization
 {
