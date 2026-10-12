@@ -130,74 +130,146 @@ final class LocalizedViewsTest extends TestCase
         }
     }
 
-    public function testPerformanceComparisonsLabelBothStagesInEachLanguage(): void
-    {
-        $labelsByLocale = [
-            'fr' => ['Avant optimisation', 'Après optimisation'],
-            'en' => ['Before optimisation', 'After optimisation'],
-        ];
-
-        foreach ($labelsByLocale as $locale => $labels) {
-            $source = file_get_contents(PROJECT_ROOT . '/src/Views/' . $locale . '/case-studies/steambotChronicles/index.get.php');
-            self::assertNotFalse($source);
-            $document = new DOMDocument();
-            self::assertTrue($document->loadHTML('<meta charset="utf-8">' . $source, LIBXML_NOERROR | LIBXML_NOWARNING));
-            $xpath = new DOMXPath($document);
-            $comparisons = $xpath->query('//*[@id="performance"]/div');
-            self::assertSame(3, $comparisons->length);
-
-            foreach ($comparisons as $comparison) {
-                $terms = $xpath->query('.//dt', $comparison);
-                $values = $xpath->query('.//dd', $comparison);
-                self::assertSame(2, $terms->length);
-                self::assertSame(2, $values->length);
-                foreach ($labels as $index => $label) {
-                    self::assertSame($label, trim($terms->item($index)->textContent));
-                    self::assertNotEmpty(trim($values->item($index)->textContent));
-                }
-            }
-        }
-    }
-
-    public function testSteambotCopyKeepsSoloAuthorshipAndExplainsLightingMeasurement(): void
+    public function testSteambotPerformanceExplainsTheLoadingStrategyWithoutAnIsolatedComparison(): void
     {
         foreach (['fr', 'en'] as $locale) {
             $source = (string) file_get_contents(PROJECT_ROOT . '/src/Views/' . $locale . '/case-studies/steambotChronicles/index.get.php');
-            self::assertDoesNotMatchRegularExpression('/\b(nous|we)\b/iu', $source);
             $document = new DOMDocument();
             self::assertTrue($document->loadHTML('<meta charset="utf-8">' . $source, LIBXML_NOERROR | LIBXML_NOWARNING));
             $xpath = new DOMXPath($document);
-            $lighting = $xpath->query('//*[@id="performance"]/div')->item(2);
-            self::assertStringContainsString('Trotmobile', $lighting->textContent);
-            self::assertStringContainsString('gzip', $lighting->textContent);
-            self::assertStringContainsString('105', $lighting->textContent);
-            $intro = $xpath->query('//*[@id="intro"]')->item(0);
-            self::assertStringContainsString($locale === 'fr' ? 'crédits' : 'credits', $intro->textContent);
-            self::assertStringContainsString($locale === 'fr' ? 'Voir le site internet' : 'Visit the website', $source);
-            self::assertStringContainsString($locale === 'fr' ? "Les agents IA ont réalisé l'essentiel de cette analyse" : 'AI agents carried out most of this analysis', $source);
+            self::assertSame(0, $xpath->query('//*[@id="preview-comparison"]')->length);
+            $performance = $xpath->query('//*[@id="performance"]')->item(0)->textContent;
+            self::assertStringContainsString($locale === 'fr' ? 'converties automatiquement en WebP' : 'converted to WebP automatically', $performance);
+            self::assertStringContainsString($locale === 'fr' ? "plus d'une centaine de modèles 3D" : 'more than one hundred 3D models', $performance);
+            self::assertStringContainsString('YouTube', $performance);
         }
     }
 
-    public function testSteambotKeepsLocalizedNavigationAndProjectResources(): void
+    public function testSteambotSeparatesItsOwnerRoleFromAiAnalysis(): void
     {
         foreach (['fr', 'en'] as $locale) {
-            $documents = [];
-            foreach (['corianderPHP', 'steambotChronicles'] as $study) {
-                $source = (string) file_get_contents(PROJECT_ROOT . '/src/Views/' . $locale . '/case-studies/' . $study . '/index.get.php');
-                $document = new DOMDocument();
-                self::assertTrue($document->loadHTML('<meta charset="utf-8">' . $source, LIBXML_NOERROR | LIBXML_NOWARNING));
-                $documents[$study] = new DOMXPath($document);
+            $source = (string) file_get_contents(PROJECT_ROOT . '/src/Views/' . $locale . '/case-studies/steambotChronicles/index.get.php');
+            self::assertDoesNotMatchRegularExpression('/\\b(nous|we)\\b/iu', $source);
+            $document = new DOMDocument();
+            self::assertTrue($document->loadHTML('<meta charset="utf-8">' . $source, LIBXML_NOERROR | LIBXML_NOWARNING));
+            $xpath = new DOMXPath($document);
+            $role = $xpath->query('//*[@id="project-role"]')->item(0);
+            self::assertNotNull($role);
+            self::assertStringContainsString('CorianderPHP', $role->textContent);
+            self::assertStringContainsString($locale === 'fr' ? 'agents IA' : 'AI agents', $role->textContent);
+            self::assertSame(1, $xpath->query('ancestor::*[@id="intro"]', $role)->length);
+            self::assertStringContainsString('Steambot Chronicles', $xpath->query('//header[@id="overview"]')->item(0)->textContent);
+            $extraction = $xpath->query('//*[@id="extraction"]')->item(0);
+            self::assertStringContainsString('PS2', $extraction->textContent);
+            self::assertStringContainsString($locale === 'fr' ? 'Les agents IA ont analysé' : 'AI agents analysed', $extraction->textContent);
+            $learning = $xpath->query('//*[@id="learning"]')->item(0)->textContent;
+            self::assertStringContainsString($locale === 'fr' ? 'mieux travailler avec des agents IA' : 'work more effectively with AI agents', $learning);
+            self::assertStringContainsString($locale === 'fr' ? 'écrire principalement en anglais' : 'Writing mainly in English', $learning);
+        }
+    }
+
+    public function testSteambotNarrativeAndScreenshotsStayAligned(): void
+    {
+        foreach (['fr', 'en'] as $locale) {
+            $html = (string) (new Router())->handle(new ServerRequest('GET', '/' . $locale . '/case-studies/steambotChronicles'))->getBody();
+            $document = new DOMDocument();
+            self::assertTrue($document->loadHTML($html, LIBXML_NOERROR | LIBXML_NOWARNING));
+            $xpath = new DOMXPath($document);
+            $sections = $xpath->query('//main//article/section[@data-language-scroll-anchor]');
+            self::assertSame(['project-links', 'intro', 'intent', 'research', 'design', '3d', 'community', 'performance', 'visibility', 'learning'], array_map(
+                static fn (DOMElement $section): string => $section->getAttribute('id'),
+                iterator_to_array($sections)
+            ));
+            $images = $xpath->query('//figure//img');
+            self::assertSame(5, $images->length);
+            foreach ($images as $image) {
+                self::assertNotEmpty($image->getAttribute('alt'));
+                self::assertGreaterThan(0, (int) $image->getAttribute('width'));
+                self::assertGreaterThan(0, (int) $image->getAttribute('height'));
+                $eager = $image->parentNode->parentNode->getAttribute('id') === 'project-preview';
+                self::assertSame($eager ? 'eager' : 'lazy', $image->getAttribute('loading'));
             }
-            $archive = $documents['steambotChronicles'];
-            self::assertSame(1, $archive->query('//h1')->length);
-            self::assertSame(1, $archive->query('//a[@href="/' . $locale . '/my-work"]')->length);
-            $archiveLinks = $archive->query('//section[@aria-labelledby="resources-title"]//a');
-            self::assertSame(2, $archiveLinks->length);
-            foreach ($archiveLinks as $link) {
+            self::assertSame(1, $xpath->query('//*[@id="builder-preview"]/figcaption/p')->length);
+            self::assertSame(1, $xpath->query('//*[@id="builder-preview"]/figcaption/a')->length);
+            self::assertSame(1, $xpath->query('//*[@id="builder-preview"]//img')->length);
+            self::assertStringContainsString('builder-editor.jpg', $xpath->query('//*[@id="builder-preview"]//img')->item(0)->getAttribute('src'));
+            self::assertSame(1, $xpath->query('//*[@id="character-preview"]//img')->length);
+            self::assertStringContainsString('character-viewer.jpg', $xpath->query('//*[@id="character-preview"]//img')->item(0)->getAttribute('src'));
+            self::assertSame(0, $xpath->query('//img[contains(@src, "manual-reader.jpg")]')->length);
+            self::assertSame(1, $xpath->query('//a[@href="https://baymard.com/research-articles/use-visual-filters-for-visually-distinct-product-attributes"]')->length);
+            self::assertStringContainsString('YouTube', $xpath->query('//*[@id="performance"]')->item(0)->textContent);
+        }
+    }
+
+    public function testSteambotUsesTheSharedCaseStudyOpening(): void
+    {
+        foreach (['fr' => 'Ressources du projet', 'en' => 'Project resources'] as $locale => $heading) {
+            $html = (string) (new Router())->handle(new ServerRequest('GET', '/' . $locale . '/case-studies/steambotChronicles'))->getBody();
+            $document = new DOMDocument();
+            self::assertTrue($document->loadHTML($html, LIBXML_NOERROR | LIBXML_NOWARNING));
+            $xpath = new DOMXPath($document);
+            $header = $xpath->query('//main//article/header')->item(0);
+            self::assertNotNull($header);
+            self::assertContains('lg:grid-cols-[0.85fr_1.15fr]', explode(' ', $header->getAttribute('class')));
+            self::assertContains('w-4/5', explode(' ', $header->parentNode->getAttribute('class')));
+            self::assertSame(1, $xpath->query('./div/h1', $header)->length);
+            self::assertSame(1, $xpath->query('./figure[@id="project-preview"]', $header)->length);
+            self::assertSame(0, $xpath->query('.//a | .//*[@id="project-role"]', $header)->length);
+            $resources = $xpath->query('./following-sibling::*[1]', $header)->item(0);
+            self::assertSame('project-links', $resources->getAttribute('id'));
+            self::assertSame($heading, trim($xpath->query('./div/div/h2', $resources)->item(0)->textContent));
+            self::assertSame(1, $xpath->query('.//a[@href="https://steambot-chronicles.com/"]', $resources)->length);
+        }
+    }
+
+    public function testSteambotKeepsRequestedCopyAndContextualisesProjectScale(): void
+    {
+        $french = (string) file_get_contents(PROJECT_ROOT . '/src/Views/fr/case-studies/steambotChronicles/index.get.php');
+        self::assertStringContainsString(
+            "J'ai créé un site où retrouver les archives de Steambot Chronicles et redécouvrir le jeu autrement : feuilleter son manuel, parcourir ses illustrations et explorer ses modèles en 3D.",
+            $french
+        );
+        self::assertStringContainsString(
+            "Steambot Chronicles est mon jeu préféré depuis l'enfance. Son site officiel a disparu, mais il reste des images, des musiques et des documents que je voulais réunir au même endroit.",
+            $french
+        );
+
+        foreach (['fr', 'en'] as $locale) {
+            $html = (string) (new Router())->handle(new ServerRequest('GET', '/' . $locale . '/case-studies/steambotChronicles'))->getBody();
+            $document = new DOMDocument();
+            self::assertTrue($document->loadHTML($html, LIBXML_NOERROR | LIBXML_NOWARNING));
+            $xpath = new DOMXPath($document);
+            self::assertSame(0, $xpath->query('//*[@id="intro"]//dl')->length);
+            self::assertStringContainsString('155', $xpath->query('//*[@id="research"]')->item(0)->textContent);
+            self::assertStringContainsString($locale === 'fr' ? "plus d'une centaine de modèles 3D" : 'more than one hundred 3D models', $xpath->query('//*[@id="performance"]')->item(0)->textContent);
+            self::assertSame(0, $xpath->query('//*[@id="learning"]//aside')->length);
+        }
+    }
+
+    public function testSteambotKeepsLocalizedNavigationAndProjectLinks(): void
+    {
+        foreach (['fr', 'en'] as $locale) {
+            $html = (string) (new Router())->handle(new ServerRequest('GET', '/' . $locale . '/case-studies/steambotChronicles'))->getBody();
+            $document = new DOMDocument();
+            self::assertTrue($document->loadHTML($html, LIBXML_NOERROR | LIBXML_NOWARNING));
+            $xpath = new DOMXPath($document);
+            self::assertSame(1, $xpath->query('//h1')->length);
+            self::assertSame(1, $xpath->query('//main//a[@href="/' . $locale . '/my-work"]')->length);
+            $links = $xpath->query('//main//a[starts-with(@href, "https://steambot-chronicles.com/")]');
+            self::assertSame(5, $links->length);
+            foreach ($links as $link) {
                 self::assertSame('_blank', $link->getAttribute('target'));
                 self::assertStringContainsString('noopener', $link->getAttribute('rel'));
             }
-            self::assertSame(1, $archive->query('//figure[@id="project-preview"]')->length);
+            self::assertSame(0, $xpath->query('//main//a[@href="https://steambot-chronicles.com/manual"]')->length);
+            self::assertSame(0, $xpath->query('//main//a[@href="https://steambot-chronicles.com/game"]')->length);
+            self::assertSame(0, $xpath->query('//main//a[@href="https://steambot-chronicles.com/gallery?category=all"]')->length);
+            self::assertSame(0, $xpath->query('//main//a[@href="https://steambot-chronicles.com/about"]')->length);
+            self::assertSame(2, $xpath->query('//main//a[@href="https://steambot-chronicles.com/trotmobile"]')->length);
+            $builderLink = $xpath->query('//*[@id="builder-preview"]//a')->item(0);
+            self::assertStringContainsString($locale === 'fr' ? 'Créer votre Trotmobile' : 'Build your Trotmobile', $builderLink->textContent);
+            self::assertSame(1, $xpath->query('//main//a[@href="https://steambot-chronicles.com/characters"]')->length);
+            self::assertSame(1, $xpath->query('//*[@id="learning"]//a[@href="https://steambot-chronicles.com/"]')->length);
         }
     }
 
